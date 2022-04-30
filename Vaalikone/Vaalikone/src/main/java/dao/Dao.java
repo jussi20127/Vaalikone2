@@ -23,7 +23,7 @@ public class Dao {
 		this.user=user;
 		this.pass=pass;
 	}
-	
+	//luodaan yhteys mysql:ään
 	public boolean getConnection() {
 		try {
 	        if (conn == null || conn.isClosed()) {
