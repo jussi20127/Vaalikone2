@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
  
  <%@ page import="java.util.ArrayList" %>   
- <%@ page import="data.Questions" %>   
+ <%@ page import="data.Questions" %>
+ <%@ page import="data.Subjects" %>  
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
@@ -57,11 +58,16 @@ for (int i=0;questionList!=null && i<questionList.size();i++){
 	
 	<label for="aihe">Aihealue:</label><br>
 	<select name='aihe' required>
-		<option value='Verotus'>Verotus</option>
-		<option value='Maanpuolustus'>Maanpuolustus</option>
-		<option value='Kulttuuri ja vapaa-aika'>Kulttuuri ja vapaa-aika</option>
-		<option value='Ilmasto ja ympäristö'>Ilmasto ja ympäristö</option>
-		<option value='Koulutus'>Koulutus</option>
+		
+		<%
+		ArrayList<Subjects> subjectList=(ArrayList<Subjects>)request.getAttribute("subjectlist");
+		String aihealue;
+		
+		for (int i=0;subjectList!=null && i<subjectList.size();i++){
+			aihealue = subjectList.get(i).getAihealue();
+			%><option value='<%=aihealue%>'><%=aihealue%></option>
+			<%} %>
+		
 	</select><br>
 	
 	<label for="kysymys">Kysymys:</label><br> 
@@ -74,6 +80,7 @@ for (int i=0;questionList!=null && i<questionList.size();i++){
 	
 	<a href='index.html'>Takaisin etusivulle</a><br>
 	<a href='ShowQuestions'>Takaisin kysymysten selaukseen</a><br>
+	<a href='AddSubject'>Lisää aihealue</a><br>
 	
 
 

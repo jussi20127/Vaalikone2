@@ -1,6 +1,7 @@
 package services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
 import data.Questions;
+import data.Subjects;
 
 /**
  * Servlet implementation class ReadToUpdate
@@ -41,12 +43,15 @@ public class EditUpdate extends HttpServlet {
 		String id=request.getParameter("kysymys_id");
 		//alustetaan tyhjä olio luokasta Questions. Sille annetaan nimeksi 'q'
 		Questions q=null;
+		ArrayList<Subjects> list=null;
 		//Mikäli saadaan yhteys tietokantaan, voidaan käyttää metodia dao.readQuestion. Metodin palauttama arvo asetetaan oliolle q tiedoiksi.
 		if (dao.getConnection()) {
 			q=dao.readQuestion(id);
+			list=dao.readAllSubjects();
 		}
-		//Vastaanotetaan q-olio Daosta, annetaan sille nimeksi 'question'
+		//Vastaanotetaan q-olio Daosta, annetaan sille nimeksi 'question' // Jussin edit, tuodaan myös ArrayList list, jotta voidaan valita aihealue
 		request.setAttribute("question", q);
+		request.setAttribute("subjectlist", list);
 		//lähetetään tiedot eteenpäin editChosen.jsp:lle
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/editChosen.jsp");
 		rd.forward(request, response);
