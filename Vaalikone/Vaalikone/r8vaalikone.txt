@@ -1,0 +1,59 @@
+-- save this file into your computer
+-- open mysql monitor with root privileges so that you have mysql monitor prompt (mysql>)
+-- give a command 'source path\r8vaalikone'
+--    where path is absolute path to the folder where the file exists, e.g. c:\temp
+--    and r8vaalikone is the name of the saved file, e.g. r8vaalikone.txt
+
+-- create a user and user's password
+-- credentials teija/kukkuu has all privileges to all all tables of database r8vaalikone (exept grant privilege)
+grant all on r8vaalikone.* to teija@localhost identified by 'kukkuu';
+grant all on r8vaalikone.* to jussi@localhost identified by 'ananas100';
+
+-- if there exists database r8vaalikone, drop it
+drop database if exists r8vaalikone;
+
+-- create database r8vaalikone (just dropped)
+create database r8vaalikone;
+
+-- This line is to handle utf8 character needs (like ä and ö) if you have not set utf8 encoding already default for your mysql
+ALTER DATABASE r8vaalikone CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- use the database
+use r8vaalikone;
+
+-- create a table ehdokkaat (mysql does not bother the case of letters - in this case)
+-- NOT NULL: the field cannot be left empty, adding a new candidate without this value is not possible
+-- VARCHAR: row length
+-- UNIQUE: makes the value unique for the table, there cannot be candidates with the same voting number
+-- EHDOKAS_ID: the primary key for this table
+
+CREATE TABLE EHDOKKAAT (
+   EHDOKAS_ID INTEGER NOT NULL,
+   SUKUNIMI VARCHAR(25) NOT NULL,
+   ETUNIMI VARCHAR(25) NOT NULL,
+   NUMERO INTEGER NOT NULL UNIQUE,
+   PUOLUE VARCHAR(50) NOT NULL,
+   KOTIPAIKKAKUNTA VARCHAR(25) NOT NULL,
+   IKA INTEGER NOT NULL,
+   AMMATTI VARCHAR(50) NOT NULL,
+   PRIMARY KEY (EHDOKAS_ID)
+);
+
+CREATE TABLE PUOLUEET (
+   PUOLUE_ID INTEGER NOT NULL,
+   PUOLUE VARCHAR(50) NOT NULL,
+   PRIMARY KEY (PUOLUE_ID)
+);
+
+
+-- Create table for questions
+
+CREATE TABLE KYSYMYKSET (
+	KYSYMYS_ID INTEGER NOT NULL,
+	KYSYMYS VARCHAR(150) NOT NULL,
+	AIHEALUE VARCHAR(25),
+	PRIMARY KEY (KYSYMYS_ID)
+);
+
+
+
