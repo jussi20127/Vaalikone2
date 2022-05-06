@@ -46,12 +46,12 @@ for (int i=0;subjectList!=null && i<subjectList.size();i++){
 
 
 
-<h1>Lisää uusi aihe</h1>
+<h1>Lisää uusi aihealue</h1>
 <div>
 <form action='newsubject' method='post' onsubmit="return confirm('Haluatko varmasti lisätä aihealueen?')">
 	
-	<label for="aihe">Aihealue:</label><br>
-	<input type="text "required name="id" value="<%=nextNumber %> " readonly ><br>
+	<label for="aihealue">Aihe:</label><br>
+	<input type="hidden"required name="id" value="<%=nextNumber %> " ><br>
 	<textarea required name="aihealue" rows="2" cols="30" maxlength="25" placeholder="Kirjoita aihe tähän...(max 25 merkkiä)"></textarea><br>
 	
 	<input type="submit" name="sendButton" value="Lisää"><br>
