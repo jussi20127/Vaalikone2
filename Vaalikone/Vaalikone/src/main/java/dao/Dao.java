@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import data.Questions;
+import data.Subjects;
 
 import java.io.Console;
 import java.sql.Connection;
@@ -139,5 +140,38 @@ public class Dao {
 			return null;
 		}
 	}
-
+	
+	//-------------- AIHEALUEET --------------------------------------------------------
+	
+	public ArrayList<Subjects> readAllSubjects() {
+		ArrayList<Subjects> list=new ArrayList<>();
+		try {
+			Statement stmt=conn.createStatement();
+			ResultSet RS=stmt.executeQuery("select * from subjects");
+			while (RS.next()){
+				Subjects s=new Subjects();
+				s.setId(RS.getInt("aihealue_id"));
+				s.setAihealue(RS.getString("aihealue"));
+				list.add(s);
+			}
+			return list;
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	public ArrayList<Subjects> addSubject(String id, String aihealue) {
+		try {
+			String sql="insert into subjects values(?,?)";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, aihealue);
+			pstmt.executeUpdate();
+			return readAllSubjects();
+		}
+		catch(SQLException e) {
+			System.out.println("Ei onnistunut");
+			return null;
+		}
+	}
 }

@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+   
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
-    
+<%@ page import="data.Subjects" %>
+<%@ page import="java.util.ArrayList" %>
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,11 +30,14 @@ Kysymys: <input type='text' name='kysymys' value='${requestScope.question.kysymy
 <%--Aihe: <input type='text' name='aihealue' value='${requestScope.question.aihe}'><br>--%>
 Aihealue:
 	<select name='aihealue' required>
-		<option value='Verotus'>Verotus</option>
-		<option value='Maanpuolustus'>Maanpuolustus</option>
-		<option value='Kulttuuri ja vapaa-aika'>Kulttuuri ja vapaa-aika</option>
-		<option value='Ilmasto ja ympäristö'>Ilmasto ja ympäristö</option>
-		<option value='Koulutus'>Koulutus</option>
+		<%
+		ArrayList<Subjects> subjectList=(ArrayList<Subjects>)request.getAttribute("subjectlist");
+		String aihealue;
+		
+		for (int i=0;subjectList!=null && i<subjectList.size();i++){
+			aihealue = subjectList.get(i).getAihealue();
+			%><option value='<%=aihealue%>'><%=aihealue%></option>
+			<%} %>
 	</select><br>
 <input type='submit' name='ok' value='Send'> 
 </form>

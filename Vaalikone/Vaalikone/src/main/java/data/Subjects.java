@@ -15,10 +15,8 @@ public class Subjects {
 	//CONSTRUCTORIT
 	
 	public Subjects() {
-		super();
 	}
 	public Subjects(int id, String aihealue) {
-		super();
 		this.id = id;
 		this.aihealue = aihealue;
 	}

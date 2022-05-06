@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
 import data.Questions;
+import data.Subjects;
 
 /**
  * Servlet implementation class ShowFish
@@ -45,7 +46,15 @@ public class AddQuestion extends HttpServlet {
 		else {
 			System.out.println("No connection to database");
 		}
+		ArrayList<Subjects> list2=null;
+		if (dao.getConnection()) {
+			list2=dao.readAllSubjects();
+		}
+		else {
+			System.out.println("No connection to database");
+		}
 		request.setAttribute("questionlist", list);
+		request.setAttribute("subjectlist", list2);
 		
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/add_question.jsp");
 		rd.forward(request, response);
