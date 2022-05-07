@@ -4,29 +4,43 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Answers {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private int kysymys_id;
-	private int ehdokas_id;
 	private int vastaus;
-	private int aihealue_id;
 	
+	//bi-directional many-to-one association to Candidate
+		@ManyToOne
+		@JoinColumn(name="id")
+		private Candidates candidate;
+	
+	//bi-directional many-to-one association to Subject
+			@ManyToOne
+			@JoinColumn(name="id")
+			private Subjects subject;
+			
+	//bi-directional many-to-one association to Question
+	@ManyToOne
+	@JoinColumn(name="id")
+	private Questions question;
+
 	
 	// CONSTRUCTORIT
 	public Answers() {
 		super();
 	}
-	public Answers(int id, int kysymys_id, int ehdokas_id, int vastaus, int aihealue_id) {
+	public Answers(int id, Questions question, Candidates candidate, int vastaus, Subjects subject) {
 		super();
 		this.id = id;
-		this.kysymys_id = kysymys_id;
-		this.ehdokas_id = ehdokas_id;
+		this.question = question;
+		this.candidate = candidate;
 		this.vastaus = vastaus;
-		this.aihealue_id = aihealue_id;
+		this.subject = subject;
 	}
 	
 	// GETTERIT JA SETTERIT
@@ -45,54 +59,46 @@ public class Answers {
 			//Do nothing - the value of id won't be changed
 		}
 	}
-	public int getKysymys_Id() {
-		return kysymys_id;
-	}
-	public void setKysymys_Id(int kysymys_id) {
-		this.kysymys_id = kysymys_id;
-	}
-	public void setKysymys_Id(String kysymys_id) {
-		try {
-			this.id = Integer.parseInt(kysymys_id);
-		}
-		catch(NumberFormatException | NullPointerException e) {
-			//Do nothing - the value of id won't be changed
-		}
-	}
-	public int getEhdokas_Id() {
-		return ehdokas_id;
-	}
-	public void setEhdokas_Id(int ehdokas_id) {
-		this.ehdokas_id = ehdokas_id;
-	}
-	public void setEhdokas_Id(String ehdokas_id) {
-		try {
-			this.id = Integer.parseInt(ehdokas_id);
-		}
-		catch(NumberFormatException | NullPointerException e) {
-			//Do nothing - the value of id won't be changed
-		}
-	}
 	public int getVastaus() {
 		return vastaus;
 	}
 	public void setVastaus(int vastaus) {
 		this.vastaus = vastaus;
 	}
-	public int getAihealue_Id() {
-		return aihealue_id;
-	}
-	public void setAihealue_Id(int aihealue_id) {
-		this.aihealue_id = aihealue_id;
-	}
-	public void setAihealue_Id(String aihealue_id) {
+	public void setVastaus(String vastaus) {
 		try {
-			this.id = Integer.parseInt(aihealue_id);
+			this.vastaus = Integer.parseInt(vastaus);
 		}
 		catch(NumberFormatException | NullPointerException e) {
 			//Do nothing - the value of id won't be changed
 		}
 	}
 	
+	public Candidates getCandidate() {
+		return this.candidate;
+	}
 
+	public void setCandidate(Candidates candidate) {
+		this.candidate = candidate;
+	}
+	
+	public Questions getQuestion() {
+		return this.question;
+	}
+
+	public void setQuestion(Questions question) {
+		this.question = question;
+	}
+	
+	public Subjects getSubject() {
+		return this.subject;
+	}
+
+	public void setSubject(Subjects subject) {
+		this.subject = subject;
+	}
+	
+	public String toString() {
+		return id+": "+vastaus+" / "+question.getId()+" / "+subject.getId()+" / "+candidate.getId();
+	}
 }

@@ -1,9 +1,13 @@
 package data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Candidates {
@@ -17,6 +21,10 @@ public class Candidates {
 	private String kotipaikkakunta;
 	private int ika;
 	private String ammatti;
+	
+	//bi-directional many-to-one association to Fish
+		@OneToMany(mappedBy="candidate")
+		private List<Answers> answerlist;
 	
 	public Candidates(String id, String sukunimi, String etunimi, String numero, String puolue, String kotipaikkakunta, String ika, String ammatti) {
 		// Puolue-luokan rakentaja
@@ -114,6 +122,31 @@ public class Candidates {
 	}
 	public void setAmmatti(String ammatti) {
 		this.ammatti = ammatti;
+	}
+	
+	//yhteys answers
+	public List<Answers> getAnswerlist() {
+		if (this.answerlist==null) {
+			answerlist=new ArrayList<>();
+		}
+		return this.answerlist;
+	}
+
+	public void setAnswerlist(List<Answers> answerlist) {
+		this.answerlist = answerlist;
+	}
+
+	public Answers addAnswer(Answers answer) {
+		getAnswerlist().add(answer);
+		answer.setCandidate(this);
+
+		return answer;
+	}
+
+	public Answers removeAnswer(Answers answer) {
+		getAnswerlist().remove(answer);
+		answer.setCandidate(null);
+		return answer;
 	}
 	
 }
