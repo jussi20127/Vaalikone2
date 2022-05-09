@@ -1,0 +1,73 @@
+-- save this file into your computer
+-- open mysql monitor with root privileges so that you have mysql monitor prompt (mysql>)
+-- give a command 'source path\r8vaalikone'
+--    where path is absolute path to the folder where the file exists, e.g. c:\temp
+--    and r8vaalikone is the name of the saved file, e.g. r8vaalikone.txt
+
+-- if there exists database r8vaalikone, drop it
+drop database if exists r8vaalikone;
+
+-- create database r8vaalikone (just dropped)
+create database r8vaalikone;
+
+-- use the database
+use r8vaalikone;
+
+-- This line is to handle utf8 character needs (like ä and ö) if you have not set utf8 encoding already default for your mysql
+ALTER DATABASE r8vaalikone CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- create a user and user's password
+-- credentials teija/kukkuu has all privileges to all all tables of database r8vaalikone (exept grant privilege)
+grant all on r8vaalikone.* to jussi@localhost identified by 'ananas100';
+
+-- Create table for Parties
+
+CREATE TABLE PARTIES (
+   	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   	PUOLUE VARCHAR(50) NOT NULL)
+ENGINE=INNODB;
+
+-- Create table for Candidates
+
+CREATE TABLE CANDIDATES (
+	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	SUKUNIMI VARCHAR(25) NOT NULL,
+	ETUNIMI VARCHAR(25) NOT NULL,
+	NUMERO INTEGER NOT NULL UNIQUE,
+	KOTIPAIKKAKUNTA VARCHAR(25) NOT NULL,
+	IKA INTEGER NOT NULL,
+	AMMATTI VARCHAR(50) NOT NULL,
+	PUOLUE_ID INT NOT NULL,
+	FOREIGN KEY(PUOLUE_ID) REFERENCES PARTIES(ID)
+)
+ENGINE=INNODB;
+
+-- Create table for Questions
+
+CREATE TABLE QUESTIONS (
+	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	KYSYMYS VARCHAR(150) NOT NULL,
+	AIHEALUE VARCHAR(25) NOT NULL)
+ENGINE=INNODB;
+
+-- Create table for Subjects
+
+CREATE TABLE SUBJECTS (
+	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+	AIHEALUE VARCHAR(25) NOT NULL)
+ENGINE=INNODB;
+
+-- Create table for Answers
+
+CREATE TABLE ANSWERS (
+	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	VASTAUS INTEGER NOT NULL,
+	CANDIDATE_ID INT NOT NULL,
+	SUBJECT_ID INT NOT NULL,
+	QUESTION_ID INT NOT NULL,
+	FOREIGN KEY(CANDIDATE_ID) REFERENCES CANDIDATES(ID),
+	FOREIGN KEY(SUBJECT_ID) REFERENCES SUBJECTS(ID),
+	FOREIGN KEY(QUESTION_ID) REFERENCES QUESTIONS(ID)
+	
+)
+ENGINE=INNODB;
