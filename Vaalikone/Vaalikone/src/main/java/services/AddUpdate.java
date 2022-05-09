@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
-import data.Questions;
+import data.Question;
 
 /**
  * Servlet implementation class AddUpdate
@@ -29,12 +29,12 @@ import data.Questions;
 		public void doPost(HttpServletRequest request, HttpServletResponse response) 
 		     throws IOException, ServletException {
 			
-			String kysymys_id=request.getParameter("kysymys_numero");
+			//String kysymys_id=request.getParameter("kysymys_numero");
 			String kysymys=request.getParameter("kysymys");
 			String aihe=request.getParameter("aihe");
-			ArrayList<Questions> list=null;
+			ArrayList<Question> list=null;
 			if (dao.getConnection()) {
-				list=dao.addQuestion(kysymys_id,kysymys,aihe);
+				list=dao.addQuestion(kysymys,aihe);
 			}
 			response.sendRedirect("ShowQuestions");
 		

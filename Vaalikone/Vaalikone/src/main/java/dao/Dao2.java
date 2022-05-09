@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import data.Candidates;
+import data.Candidate;
 
 public class Dao2 {
 	private String url;
@@ -39,18 +39,18 @@ public class Dao2 {
 			return false;
 		}
 	}
-	public ArrayList<Candidates> readAllCandidates() {
-		ArrayList<Candidates> list=new ArrayList<>();
+	public ArrayList<Candidate> readAllCandidates() {
+		ArrayList<Candidate> list=new ArrayList<>();
 		try {
 			Statement stmt=conn.createStatement();
-			ResultSet RS=stmt.executeQuery("select * from ehdokkaat");
+			ResultSet RS=stmt.executeQuery("select * from candidates");
 			while (RS.next()){
-				Candidates c=new Candidates();
-				c.setCandidate_Id(RS.getInt("ehdokas_id"));
+				Candidate c=new Candidate();
+				c.setId(RS.getInt("id"));
 				c.setSukunimi(RS.getString("sukunimi"));
 				c.setEtunimi(RS.getString("etunimi"));
 				c.setNumero(RS.getString("numero"));
-				c.setPuolue(RS.getString("puolue"));
+				//c.setParty(RS.getString("puolue"));
 				c.setKotipaikkakunta(RS.getString("kotipaikkakunta"));
 				c.setIka(RS.getString("ika"));
 				c.setAmmatti(RS.getString("ammatti"));
@@ -62,55 +62,55 @@ public class Dao2 {
 			return null;
 		}
 	}
-	public ArrayList<Candidates> updateCandidate(Candidates c) {
+	public ArrayList<Candidate> updateCandidate(Candidate c) {
 		try {
-			String sql="update ehdokkaat set ehdokas_id=? where ehdokas_id=?";
-			String sql1="update ehdokkaat set sukunimi=? where ehdokas_id=?";
-			String sql2="update ehdokkaat set etunimi=? where ehdokas_id=?";
-			String sql3="update ehdokkaat set numero=? where ehdokas_id=?";
-			String sql4="update ehdokkaat set puolue=? where ehdokas_id=?";
-			String sql5="update ehdokkaat set kotipaikkakunta=? where ehdokas_id=?";
-			String sql6="update ehdokkaat set ika=? where ehdokas_id=?";
-			String sql7="update ehdokkaat set ammatti=? where ehdokas_id=?";
+			//String sql="update candidates set id=? where id=?";
+			String sql1="update candidates set sukunimi=? where id=?";
+			String sql2="update candidates set etunimi=? where id=?";
+			String sql3="update candidates set numero=? where id=?";
+			//String sql4="update candidates set puolue=? where id=?";
+			String sql5="update candidates set kotipaikkakunta=? where id=?";
+			String sql6="update candidates set ika=? where id=?";
+			String sql7="update candidates set ammatti=? where id=?";
 			
-			PreparedStatement pstmt=conn.prepareStatement(sql);
+			//PreparedStatement pstmt=conn.prepareStatement(sql);
 			PreparedStatement pstmt1=conn.prepareStatement(sql1);
 			PreparedStatement pstmt2=conn.prepareStatement(sql2);
 			PreparedStatement pstmt3=conn.prepareStatement(sql3);
-			PreparedStatement pstmt4=conn.prepareStatement(sql4);
+			//PreparedStatement pstmt4=conn.prepareStatement(sql4);
 			PreparedStatement pstmt5=conn.prepareStatement(sql5);
 			PreparedStatement pstmt6=conn.prepareStatement(sql6);
 			PreparedStatement pstmt7=conn.prepareStatement(sql7);
 			
-			pstmt.setInt(1, c.getCandidate_Id());
-			pstmt.setInt(2, c.getCandidate_Id());
+			//pstmt.setInt(1, c.getId());
+			//pstmt.setInt(2, c.getId());
 			
 			pstmt1.setString(1, c.getSukunimi());
-			pstmt1.setInt(2, c.getCandidate_Id());
+			pstmt1.setInt(2, c.getId());
 			
 			pstmt2.setString(1, c.getEtunimi());
-			pstmt2.setInt(2, c.getCandidate_Id());
+			pstmt2.setInt(2, c.getId());
 			
 			pstmt3.setInt(1, c.getNumero());
-			pstmt3.setInt(2, c.getCandidate_Id());
+			pstmt3.setInt(2, c.getId());
 			
-			pstmt4.setString(1, c.getPuolue());
-			pstmt4.setInt(2, c.getCandidate_Id());
+			//pstmt4.setInt(1, c.party_id());
+			//pstmt4.setInt(2, c.getId());
 			
 			pstmt5.setString(1, c.getKotipaikkakunta());
-			pstmt5.setInt(2, c.getCandidate_Id());
+			pstmt5.setInt(2, c.getId());
 			
 			pstmt6.setInt(1, c.getIka());
-			pstmt6.setInt(2, c.getCandidate_Id());
+			pstmt6.setInt(2, c.getId());
 			
 			pstmt7.setString(1, c.getAmmatti());
-			pstmt7.setInt(2, c.getCandidate_Id());
+			pstmt7.setInt(2, c.getId());
 			
-			pstmt.executeUpdate();
+			//pstmt.executeUpdate();
 			pstmt1.executeUpdate();
 			pstmt2.executeUpdate();
 			pstmt3.executeUpdate();
-			pstmt4.executeUpdate();
+			//pstmt4.executeUpdate();
 			pstmt5.executeUpdate();
 			pstmt6.executeUpdate();
 			pstmt7.executeUpdate();
@@ -120,9 +120,9 @@ public class Dao2 {
 			return null;
 		}
 	}
-	public ArrayList<Candidates> deleteCandidate(String id) {
+	public ArrayList<Candidate> deleteCandidate(String id) {
 		try {
-			String sql="delete from ehdokkaat where ehdokas_id=?";
+			String sql="delete from candidates where id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.executeUpdate();
@@ -133,20 +133,20 @@ public class Dao2 {
 		}
 	}
 
-	public Candidates readCandidate(String id) {
-		Candidates c=null;
+	public Candidate readCandidate(String id) {
+		Candidate c=null;
 		try {
-			String sql="select * from ehdokkaat where ehdokas_id=?";
+			String sql="select * from candidates where id=?";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			ResultSet RS=pstmt.executeQuery();
 			while (RS.next()){
-				c=new Candidates();
-				c.setCandidate_Id(RS.getInt("ehdokas_id"));
+				c=new Candidate();
+				c.setId(RS.getInt("id"));
 				c.setSukunimi(RS.getString("sukunimi"));
 				c.setEtunimi(RS.getString("etunimi"));
 				c.setNumero(RS.getInt("numero"));
-				c.setPuolue(RS.getString("puolue"));
+				//c.setPuolue(RS.getString("puolue"));
 				c.setKotipaikkakunta(RS.getString("kotipaikkakunta"));
 				c.setIka(RS.getInt("ika"));
 				c.setAmmatti(RS.getString("ammatti"));
@@ -158,18 +158,18 @@ public class Dao2 {
 			return null;
 		}
 	}
-	public ArrayList<Candidates> addCandidate(String id, String sukunimi, String etunimi, String numero, String puolue, String kotipaikkakunta, String ika, String ammatti) {
+	public ArrayList<Candidate> addCandidate(String sukunimi, String etunimi, String numero, String kotipaikkakunta, String ika, String ammatti) {
 		try {
-			String sql="insert into ehdokkaat values(?,?,?,?,?,?,?,?)";
+			String sql="insert into candidates (sukunimi,etunimi,numero,puolue_id,kotipaikkakunta,ika,ammatti) values(?,?,?,?,?,?,?)";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, sukunimi);
-			pstmt.setString(3, etunimi);
-			pstmt.setString(4, numero);
-			pstmt.setString(5, puolue);
-			pstmt.setString(6, kotipaikkakunta);
-			pstmt.setString(7, ika);
-			pstmt.setString(8, ammatti);
+			//pstmt.setString(1, id);
+			pstmt.setString(1, sukunimi);
+			pstmt.setString(2, etunimi);
+			pstmt.setString(3, numero);
+			pstmt.setString(4, "1"); // TÄMÄ VIELÄ KORJATTAVA!!!
+			pstmt.setString(5, kotipaikkakunta);
+			pstmt.setString(6, ika);
+			pstmt.setString(7, ammatti);
 			pstmt.executeUpdate();
 			return readAllCandidates();
 		}

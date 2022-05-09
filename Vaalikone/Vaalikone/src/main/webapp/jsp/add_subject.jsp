@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
  
  <%@ page import="java.util.ArrayList" %>   
- <%@ page import="data.Questions" %>
- <%@ page import="data.Subjects" %>  
+ <%@ page import="data.Question" %>
+ <%@ page import="data.Subject" %>  
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
@@ -22,13 +22,13 @@
 
 <%
 // Hakee viimeisen ehdokkaan ID:n lisää 1 ja asettaa nextFree arvoksi, joka annetaan uudelle kysymykselle ID:ksi.
-ArrayList<Subjects> subjectList=(ArrayList<Subjects>)request.getAttribute("subjectlist");
+ArrayList<Subject> subjectList=(ArrayList<Subject>)request.getAttribute("subjectlist");
 int last = 1;
 int nextNumber =1;
 int nextFree =0;
-if(subjectList.size()>0){
+if(subjectList.size()>0 && subjectList!=null){
 	last = subjectList.size();	
-	Subjects s = subjectList.get(last-1);
+	Subject s = subjectList.get(last-1);
 	nextNumber = s.getId()+1;
 
 

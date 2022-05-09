@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
-import data.Subjects;
+import data.Subject;
 
 /**
  * Servlet implementation class AddSubject
@@ -38,7 +38,7 @@ public class AddSubject extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Subjects> list=null;
+		ArrayList<Subject> list=null;
 		if (dao.getConnection()) {
 			list=dao.readAllSubjects();
 		}

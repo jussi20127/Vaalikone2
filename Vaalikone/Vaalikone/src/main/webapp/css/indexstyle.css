@@ -37,4 +37,21 @@ body {
   color: black;
 }
 
+#buttons {
+	padding: 12px 0px;
+}
+
+#buttons a:link, a:visited {
+  background-color: #C9E1B5;
+  color: black;
+  padding: 14px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#buttons a:hover, a:active {
+  background-color: #86bc5a;
+}
+
 

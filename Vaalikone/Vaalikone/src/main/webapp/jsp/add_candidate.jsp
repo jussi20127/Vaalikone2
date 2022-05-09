@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
  
  <%@ page import="java.util.ArrayList" %>   
- <%@ page import="data.Candidates" %>   
+ <%@ page import="data.Candidate" %>   
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
@@ -25,20 +25,20 @@ TYYLIT JA SCRIPTIT TOISTAISEKSI KOMMENTOITU POIS
 
 <%
 // Hakee viimeisen ehdokkaan ID:n lisää 1 ja asettaa nextFree arvoksi, joka annetaan uudelle kysymykselle ID:ksi.
-ArrayList<Candidates> candidateList=(ArrayList<Candidates>)request.getAttribute("candidatelist");
+ArrayList<Candidate> candidateList=(ArrayList<Candidate>)request.getAttribute("candidatelist");
 int last = 1;
 int nextNumber =1;
 int nextFree =0;
 if(candidateList.size()>0){
 	last = candidateList.size();	
-	Candidates c = candidateList.get(last-1);
-	nextNumber = c.getCandidate_Id()+1;
+	Candidate c = candidateList.get(last-1);
+	nextNumber = c.getId()+1;
 
 
 for (int i=0;candidateList!=null && i<candidateList.size();i++){
 	
 	c=candidateList.get(i);
-	if(i+1 != c.getCandidate_Id()){
+	if(i+1 != c.getId()){
 		nextFree = i+1;
 	break;}
 	}
@@ -54,12 +54,12 @@ for (int i=0;candidateList!=null && i<candidateList.size();i++){
 <div>
 <form action='newcandidate' method='post' onsubmit="return confirm('Haluatko varmasti lisätä ehdokkaan?')">
 
-	<label for="ehdokas_id">Ehdokkaan ID:</label><br>
+	<!-- <label for="ehdokas_id">Ehdokkaan ID:</label><br>
 	<%if (nextFree !=0){%>
 	<input type="radio" name="ehdokas_id" value="<%=nextFree %>" required><%=nextFree %> (välistä puuttuva numero)<br>
 	<%};%>
 	<input type="radio" name="ehdokas_id" value="<%=nextNumber %>" required><%=nextNumber %> (seuraava vapaa numero)<br><label for="ehdokas_id"></label><br>
-	
+	 -->
 	Puolue:
 	<select name='puolue' required>
 		<option value="SDP">SDP</option>

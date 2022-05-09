@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
  
  <%@ page import="java.util.ArrayList" %>   
- <%@ page import="data.Questions" %>   
+ <%@ page import="data.Question" %>   
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
@@ -34,17 +34,17 @@
 	
 	<%
 	
-	ArrayList<Questions> questionList=(ArrayList<Questions>)request.getAttribute("questionlist");
+	ArrayList<Question> questionList=(ArrayList<Question>)request.getAttribute("questionlist");
 	for (int i=0;questionList!=null && i<questionList.size();i++){
-	Questions q=questionList.get(i);
-	String Poistetaanko = "Poistetaanko varmasti "+q.getAihe()+ " "+q.getKysymys()+"?";
+	Question q=questionList.get(i);
+	String Poistetaanko = "Poistetaanko varmasti "+q.getAihealue()+ " "+q.getKysymys()+"?";
 	%>
 		<tr class="row">
-			<td class="bold"><%out.println(q.getKysymys_Id());%></td>
-			<td><%out.println(q.getAihe());%></td>
+			<td class="bold"><%out.println(q.getId());%></td>
+			<td><%out.println(q.getAihealue());%></td>
 			<td><%out.println(q.getKysymys());%></td>
-			<td><a href="/EditUpdate?kysymys_id=<%out.println(q.getKysymys_Id());%>">update</a></td>
-			<td><a href="/deleteQuestion?kysymys_id=<%out.println(q.getKysymys_Id());%>" onclick='return confirm(<%out.println('"'+Poistetaanko+'"');%>)'>delete</a></td>
+			<td><a href="/EditUpdate?kysymys_id=<%out.println(q.getId());%>">update</a></td>
+			<td><a href="/deleteQuestion?kysymys_id=<%out.println(q.getId());%>" onclick='return confirm(<%out.println('"'+Poistetaanko+'"');%>)'>delete</a></td>
 		</tr>
 	<%};
 	%>
@@ -52,7 +52,7 @@
 
 
 <br>
-<a href="/">Palaa etusivulle</a>
+<a href="/admin.html">Takaisin</a>
 <a href="/AddQuestion">Lisää Kysymys</a>
 </body>
 </html>

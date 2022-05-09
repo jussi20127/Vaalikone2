@@ -9,10 +9,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
-import data.Answers;
-import data.Candidates;
-import data.Questions;
-import data.Subjects;
+import data.Answer;
+import data.Candidate;
+import data.Question;
+import data.Subject;
 
 public class JpaDao {
 	
@@ -22,173 +22,173 @@ public class JpaDao {
 		}
 		
 		//answers
-		public void addAnswer(Answers answer) {
+		public void addAnswer(Answer answer) {
 			em.getTransaction().begin();
 			em.persist(answer);
 			em.getTransaction().commit();
 		}
 		
-		public Answers getAnswer(Answers answer) {
-			return new Answers();
+		public Answer getAnswer(Answer answer) {
+			return new Answer();
 		}
-		public Answers getAnswer(int id) {
-			return new Answers();
+		public Answer getAnswer(int id) {
+			return new Answer();
 		}
 		
-		public ArrayList<Answers> deleteAnswer(Answers answer) {
+		public ArrayList<Answer> deleteAnswer(Answer answer) {
 			em.getTransaction().begin();
-			Answers a=em.find(Answers.class, answer.getId());
+			Answer a=em.find(Answer.class, answer.getId());
 			if (a!=null) {
 				em.remove(a);//The actual insertion line
 			}
 			em.getTransaction().commit();
-			ArrayList<Answers> list=readAnswers();		
+			ArrayList<Answer> list=readAnswers();		
 			return list;
 		}
-		public ArrayList<Answers> updateAnswer(Answers answer) {
+		public ArrayList<Answer> updateAnswer(Answer answer) {
 			em.getTransaction().begin();
-			Answers a=em.find(Answers.class, answer.getId());
+			Answer a=em.find(Answer.class, answer.getId());
 			if (a!=null) {
 				em.merge(answer);//The actual update line
 			}
 			em.getTransaction().commit();
 			//Calling the method readFish() of this service
-			ArrayList<Answers> list=readAnswers();		
+			ArrayList<Answer> list=readAnswers();		
 			return list;
 			
 		}
-		public ArrayList<Answers> readAnswers() {
+		public ArrayList<Answer> readAnswers() {
 			em.getTransaction().begin();
-			ArrayList<Answers> list=(ArrayList<Answers>) em.createQuery("select a from Answers a").getResultList();
+			ArrayList<Answer> list=(ArrayList<Answer>) em.createQuery("select a from Answers a").getResultList();
 			em.getTransaction().commit();
 			return list;
 		}
 
 		//candidates
-		public void addCandidate(Candidates candidate) {
+		public void addCandidate(Candidate candidate) {
 			em.getTransaction().begin();
 			em.persist(candidate);
 			em.getTransaction().commit();
 		}
 		
-		public Candidates getCandidate(Candidates candidate) {
-			return new Candidates();
+		public Candidate getCandidate(Candidate candidate) {
+			return new Candidate();
 		}
-		public Candidates getCandidate(int id) {
-			return new Candidates();
+		public Candidate getCandidate(int id) {
+			return new Candidate();
 		}
 		
-		public ArrayList<Candidates> deleteCandidate(Candidates candidate) {
+		public ArrayList<Candidate> deleteCandidate(Candidate candidate) {
 			em.getTransaction().begin();
-			Candidates c=em.find(Candidates.class, candidate.getId());
+			Candidate c=em.find(Candidate.class, candidate.getId());
 			if (c!=null) {
 				em.remove(c);//The actual insertion line
 			}
 			em.getTransaction().commit();
-			ArrayList<Candidates> list=readCandidates();		
+			ArrayList<Candidate> list=readCandidates();		
 			return list;
 		}
-		public ArrayList<Candidates> updateCandidate(Candidates candidate) {
+		public ArrayList<Candidate> updateCandidate(Candidate candidate) {
 			em.getTransaction().begin();
-			Candidates c=em.find(Candidates.class, candidate.getId());
+			Candidate c=em.find(Candidate.class, candidate.getId());
 			if (c!=null) {
 				em.merge(candidate);//The actual update line
 			}
 			em.getTransaction().commit();
 			//Calling the method readFish() of this service
-			ArrayList<Candidates> list=readCandidates();		
+			ArrayList<Candidate> list=readCandidates();		
 			return list;
 		}
 		
-		public ArrayList<Candidates> readCandidates() {
+		public ArrayList<Candidate> readCandidates() {
 			em.getTransaction().begin();
-			ArrayList<Candidates> list=(ArrayList<Candidates>) em.createQuery("select a from Candidates a").getResultList();
+			ArrayList<Candidate> list=(ArrayList<Candidate>) em.createQuery("select a from Candidates a").getResultList();
 			em.getTransaction().commit();
 			return list;
 		}
 		
 		//questions
-		public void addQuestion(Questions question) {
+		public void addQuestion(Question question) {
 			em.getTransaction().begin();
 			em.persist(question);
 			em.getTransaction().commit();
 		}
 		
-		public Questions getQuestion(Questions question) {
-			return new Questions();
+		public Question getQuestion(Question question) {
+			return new Question();
 		}
-		public Questions getQuestion(int id) {
-			return new Questions();
+		public Question getQuestion(int id) {
+			return new Question();
 		}
 		
-		public ArrayList<Questions> deleteQuestion(Questions question) {
+		public ArrayList<Question> deleteQuestion(Question question) {
 			em.getTransaction().begin();
-			Questions q=em.find(Questions.class, question.getId());
+			Question q=em.find(Question.class, question.getId());
 			if (q!=null) {
 				em.remove(q);//The actual insertion line
 			}
 			em.getTransaction().commit();
-			ArrayList<Questions> list=readQuestions();		
+			ArrayList<Question> list=readQuestions();		
 			return list;
 		}
-		public ArrayList<Questions> updateQuestions(Questions question) {
+		public ArrayList<Question> updateQuestions(Question question) {
 			em.getTransaction().begin();
-			Questions q=em.find(Questions.class, question.getId());
+			Question q=em.find(Question.class, question.getId());
 			if (q!=null) {
 				em.merge(question);//The actual update line
 			}
 			em.getTransaction().commit();
 			//Calling the method readFish() of this service
-			ArrayList<Questions> list=readQuestions();		
+			ArrayList<Question> list=readQuestions();		
 			return list;
 		}
 		
-		public ArrayList<Questions> readQuestions() {
+		public ArrayList<Question> readQuestions() {
 			em.getTransaction().begin();
-			ArrayList<Questions> list=(ArrayList<Questions>) em.createQuery("select a from Questions a").getResultList();
+			ArrayList<Question> list=(ArrayList<Question>) em.createQuery("select a from Questions a").getResultList();
 			em.getTransaction().commit();
 			return list;
 		}
 		
 		//subjects - en tiedä tarvitaanko, mutta varavuoksi
-		public void addSubject(Subjects subject) {
+		public void addSubject(Subject subject) {
 			em.getTransaction().begin();
 			em.persist(subject);
 			em.getTransaction().commit();
 		}
 		
-		public Subjects getSubject(Subjects subject) {
-			return new Subjects();
+		public Subject getSubject(Subject subject) {
+			return new Subject();
 		}
-		public Subjects getSubject(int id) {
-			return new Subjects();
+		public Subject getSubject(int id) {
+			return new Subject();
 		}
 		
-		public ArrayList<Subjects> deleteSubjects(Subjects subject) {
+		public ArrayList<Subject> deleteSubjects(Subject subject) {
 			em.getTransaction().begin();
-			Subjects s=em.find(Subjects.class, subject.getId());
+			Subject s=em.find(Subject.class, subject.getId());
 			if (s!=null) {
 				em.remove(s);//The actual insertion line
 			}
 			em.getTransaction().commit();
-			ArrayList<Subjects> list=readSubjects();		
+			ArrayList<Subject> list=readSubjects();		
 			return list;
 		}
-		public ArrayList<Subjects> updateSubjects(Subjects subject) {
+		public ArrayList<Subject> updateSubjects(Subject subject) {
 			em.getTransaction().begin();
-			Subjects s=em.find(Subjects.class, subject.getId());
+			Subject s=em.find(Subject.class, subject.getId());
 			if (s!=null) {
 				em.merge(subject);//The actual update line
 			}
 			em.getTransaction().commit();
 			//Calling the method readFish() of this service
-			ArrayList<Subjects> list=readSubjects();		
+			ArrayList<Subject> list=readSubjects();		
 			return list;
 		}
 		
-		public ArrayList<Subjects> readSubjects() {
+		public ArrayList<Subject> readSubjects() {
 			em.getTransaction().begin();
-			ArrayList<Subjects> list=(ArrayList<Subjects>) em.createQuery("select a from Subjects a").getResultList();
+			ArrayList<Subject> list=(ArrayList<Subject>) em.createQuery("select a from Subjects a").getResultList();
 			em.getTransaction().commit();
 			return list;
 		}

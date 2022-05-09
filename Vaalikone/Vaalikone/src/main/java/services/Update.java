@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
-import data.Questions;
+import data.Question;
 
 @WebServlet(
     name = "Update/editing",
@@ -25,7 +25,7 @@ public class Update extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 	     throws IOException {
-		response.sendRedirect("index.html");
+		response.sendRedirect("../index.html");
 	}
 	
 	//doPost-metodi, tähän pyydetään formilta attribuutit id, kysymys ja aihe
@@ -36,12 +36,13 @@ public class Update extends HttpServlet {
 		String aihealue=request.getParameter("aihealue");
 		
 		//luo uuden Questions-luokan olion vastaanotetuilla attribuuteilla
-		Questions q=new Questions(id, kysymys, aihealue);
+		Question q=new Question(id, kysymys, aihealue);
 		
 		//Luodaan ArrayList Question-olion tyyppisenä, annetaan sille nimi 'list' ja arvot saadaan kutsumalla updateQuestion-metodia Daosta
-		ArrayList<Questions> list=null;
+		ArrayList<Question> list=null;
 		if (dao.getConnection()) {
 			list=dao.updateQuestion(q);
+			
 		}
 		
 		request.setAttribute("questionlist", list);
