@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao2;
-import data.Candidates;
-import data.Questions;
+import data.Candidate;
+import data.Question;
 
 /**
  * Servlet implementation class ShowCandidates
@@ -39,7 +39,7 @@ public class ShowCandidates extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Candidates> list=null;
+		ArrayList<Candidate> list=null;
 		if (dao2.getConnection()) {
 			list=dao2.readAllCandidates();
 		}

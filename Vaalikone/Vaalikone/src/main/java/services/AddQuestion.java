@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
-import data.Questions;
-import data.Subjects;
+import data.Question;
+import data.Subject;
 
 /**
  * Servlet implementation class ShowFish
@@ -39,14 +39,14 @@ public class AddQuestion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Questions> list=null;
+		ArrayList<Question> list=null;
 		if (dao.getConnection()) {
 			list=dao.readAllQuestions();
 		}
 		else {
 			System.out.println("No connection to database");
 		}
-		ArrayList<Subjects> list2=null;
+		ArrayList<Subject> list2=null;
 		if (dao.getConnection()) {
 			list2=dao.readAllSubjects();
 		}

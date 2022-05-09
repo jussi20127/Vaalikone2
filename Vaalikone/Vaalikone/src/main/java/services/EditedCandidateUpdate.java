@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao2;
-import data.Candidates;
+import data.Candidate;
 
 @WebServlet(
     name = "EditedCandidateUpdate",
@@ -38,9 +38,9 @@ public class EditedCandidateUpdate extends HttpServlet {
 		String ika=request.getParameter("ika");
 		String ammatti=request.getParameter("ammatti");
 		
-		Candidates c=new Candidates(id, sukunimi, etunimi, numero, puolue, kotipaikkakunta, ika, ammatti);
+		Candidate c=new Candidate(id, sukunimi, etunimi, numero, kotipaikkakunta, ika, ammatti);
 		
-		ArrayList<Candidates> list=null;
+		ArrayList<Candidate> list=null;
 		if (dao.getConnection()) {
 			list=dao.updateCandidate(c);
 		}

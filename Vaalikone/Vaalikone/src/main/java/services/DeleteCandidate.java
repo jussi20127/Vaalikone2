@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao2;
-import data.Candidates;
+import data.Candidate;
 
 /**
  * Servlet implementation class DeleteCandidate
@@ -32,7 +32,7 @@ public class DeleteCandidate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id=request.getParameter("ehdokas_id");
-		ArrayList<Candidates> list=null;
+		ArrayList<Candidate> list=null;
 		if (dao2.getConnection()) {
 			list=dao2.deleteCandidate(id);
 		}

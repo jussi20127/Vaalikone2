@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao2;
-import data.Candidates;
+import data.Candidate;
 
 /**
  * Servlet implementation class CandidateUpdate
@@ -29,7 +29,7 @@ import data.Candidates;
 		public void doPost(HttpServletRequest request, HttpServletResponse response) 
 		     throws IOException, ServletException {
 			
-			String id=request.getParameter("ehdokas_id");
+			//String id=request.getParameter("ehdokas_id");
 			String sukunimi=request.getParameter("sukunimi");
 			String etunimi=request.getParameter("etunimi");
 			String numero=request.getParameter("numero");
@@ -38,9 +38,9 @@ import data.Candidates;
 			String ika=request.getParameter("ika");
 			String ammatti=request.getParameter("ammatti");
 			
-			ArrayList<Candidates> list=null;
+			ArrayList<Candidate> list=null;
 			if (dao.getConnection()) {
-				list=dao.addCandidate(id,sukunimi,etunimi,numero,puolue,kotipaikkakunta,ika,ammatti);
+				list=dao.addCandidate(sukunimi,etunimi,numero,kotipaikkakunta,ika,ammatti);
 			}
 			response.sendRedirect("ShowCandidates");
 		

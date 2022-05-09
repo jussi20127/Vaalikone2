@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
-import data.Subjects;
+import data.Subject;
 
 /**
  * Servlet implementation class CandidateUpdate
@@ -33,7 +33,7 @@ import data.Subjects;
 			String aihealue=request.getParameter("aihealue");
 			
 			
-			ArrayList<Subjects> list=null;
+			ArrayList<Subject> list=null;
 			if (dao.getConnection()) {
 				list=dao.addSubject(id,aihealue);
 			}

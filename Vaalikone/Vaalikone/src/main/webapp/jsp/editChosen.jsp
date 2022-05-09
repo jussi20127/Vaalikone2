@@ -3,7 +3,7 @@
    
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
-<%@ page import="data.Subjects" %>
+<%@ page import="data.Subject" %>
 <%@ page import="java.util.ArrayList" %>
   
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ Kysymys: <input type='text' name='kysymys' value='${requestScope.question.kysymy
 Aihealue:
 	<select name='aihealue' required>
 		<%
-		ArrayList<Subjects> subjectList=(ArrayList<Subjects>)request.getAttribute("subjectlist");
+		ArrayList<Subject> subjectList=(ArrayList<Subject>)request.getAttribute("subjectlist");
 		String aihealue;
 		
 		for (int i=0;subjectList!=null && i<subjectList.size();i++){

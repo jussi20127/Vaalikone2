@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
-import data.Questions;
-import data.Subjects;
+import data.Question;
+import data.Subject;
 
 /**
  * Servlet implementation class ReadToUpdate
@@ -42,8 +42,8 @@ public class EditUpdate extends HttpServlet {
 		// TODO Auto-generated method stub
 		String id=request.getParameter("kysymys_id");
 		//alustetaan tyhjä olio luokasta Questions. Sille annetaan nimeksi 'q'
-		Questions q=null;
-		ArrayList<Subjects> list=null;
+		Question q=null;
+		ArrayList<Subject> list=null;
 		//Mikäli saadaan yhteys tietokantaan, voidaan käyttää metodia dao.readQuestion. Metodin palauttama arvo asetetaan oliolle q tiedoiksi.
 		if (dao.getConnection()) {
 			q=dao.readQuestion(id);

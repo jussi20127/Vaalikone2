@@ -11,9 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Dao;
-import data.Questions;
-import data.Questions;
-import data.Questions;
+import data.Question;
+
 
 /**
  * Servlet implementation class ShowFish
@@ -31,7 +30,7 @@ import data.Questions;
 		public void doGet(HttpServletRequest request, HttpServletResponse response) 
 		     throws IOException, ServletException {
 			String id=request.getParameter("kysymys_id");
-			ArrayList<Questions> list=null;
+			ArrayList<Question> list=null;
 			if (dao.getConnection()) {
 				list=dao.deleteQuestion(id);
 			}
