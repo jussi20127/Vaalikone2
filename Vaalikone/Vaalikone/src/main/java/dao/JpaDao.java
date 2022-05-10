@@ -15,7 +15,7 @@ import data.Question;
 import data.Subject;
 
 public class JpaDao {
-	
+		
 		private EntityManager em;
 		public JpaDao(EntityManager em) {
 			this.em=em;
@@ -121,31 +121,31 @@ public class JpaDao {
 			return new Question();
 		}
 		
-		public ArrayList<Question> deleteQuestion(Question question) {
+		public List<Question> deleteQuestion(Question question) {
 			em.getTransaction().begin();
 			Question q=em.find(Question.class, question.getId());
 			if (q!=null) {
 				em.remove(q);//The actual insertion line
 			}
 			em.getTransaction().commit();
-			ArrayList<Question> list=readQuestions();		
+			List<Question> list=readQuestions();		
 			return list;
 		}
-		public ArrayList<Question> updateQuestions(Question question) {
+		public List<Question> updateQuestions(Question question) {
 			em.getTransaction().begin();
 			Question q=em.find(Question.class, question.getId());
 			if (q!=null) {
 				em.merge(question);//The actual update line
 			}
 			em.getTransaction().commit();
-			//Calling the method readFish() of this service
-			ArrayList<Question> list=readQuestions();		
+			//Calling the method readQuestions() of this service
+			List<Question> list=readQuestions();		
 			return list;
 		}
-		
-		public ArrayList<Question> readQuestions() {
+		//Palautetaan kaikki kysymykset
+		public List<Question> readQuestions() {
 			em.getTransaction().begin();
-			ArrayList<Question> list=(ArrayList<Question>) em.createQuery("select a from Questions a").getResultList();
+			List<Question> list=(List<Question>) em.createQuery("select a from Question a").getResultList();
 			em.getTransaction().commit();
 			return list;
 		}
