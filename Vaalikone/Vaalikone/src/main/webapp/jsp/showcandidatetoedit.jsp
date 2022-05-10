@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+ <%@ page import="java.util.ArrayList" %>   
+ <%@ page import="data.Candidate" %>   
+ <%@ page import="data.Party" %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,18 +25,22 @@ Ehdokasnumero:<br> <input type='text' name='numero' value='${requestScope.candid
 Sukunimi<br> <input type='text' name='sukunimi' value='${requestScope.candidatelist.sukunimi}' required><br>
 Etunimi<br> <input type='text' name='etunimi' value='${requestScope.candidatelist.etunimi}' required><br>
 
-Puolue:<br>
-	<select name='puolue' required>
-		<option value="SDP">SDP</option>
-		<option value="KoK">KoK</option>
-		<option value="Kesk.">Kesk.</option>
-		<option value="Vihr.">Vihr.</option>
-		<option value="Vas.">Vas.</option>
-		<option value="PS">PS</option>
-		<option value="RKP">RKP</option>
-		<option value="KD">KD</option>
-		<option value="Liik.">Liik.</option>
-		<option value="VKK">VKK</option>
+Puolue:
+	<select name='puolue_id' required>
+		
+		<%
+		ArrayList<Party> partyList=(ArrayList<Party>)request.getAttribute("partylist");
+		String puolue;
+		int p1;
+		for (int i=0;partyList!=null && i<partyList.size();i++){
+			puolue = partyList.get(i).getPuolue();
+			p1=partyList.get(i).getId();
+			
+			%>
+			<option value='<%=p1%>'><%=puolue%></option>
+			
+			<%} %>
+		
 	</select><br>
 
 Kotipaikkakunta:<br> <input type='text' name='kotipaikkakunta' value='${requestScope.candidatelist.kotipaikkakunta}' required><br>

@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
  
  <%@ page import="java.util.ArrayList" %>   
- <%@ page import="data.Candidate" %>   
+ <%@ page import="data.Candidate" %> 
+ <%@ page import="data.Party" %>  
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
@@ -37,10 +38,12 @@
 	</tr>
 	
 	<%
-	
+	ArrayList<Party> partyList=(ArrayList<Party>)request.getAttribute("partylist");
 	ArrayList<Candidate> candidateList=(ArrayList<Candidate>)request.getAttribute("candidatelist");
 	for (int i=0;candidateList!=null && i<candidateList.size();i++){
 	Candidate c=candidateList.get(i);
+
+	
 	String Poistetaanko = "Poistetaanko varmasti "+c.getEtunimi()+ " "+c.getSukunimi()+"?";
 	%>
 		<tr class="row">
@@ -49,7 +52,7 @@
 			<td><%out.println(c.getSukunimi());%></td>
 			<td><%out.println(c.getIka());%></td>
 			<td><%out.println(c.getKotipaikkakunta());%></td>
-			<td><%out.println(c.getParty());%></td>
+			<td><%out.println(c.getPuolue());%></td>
 			<td><%out.println(c.getAmmatti());%></td>
 			<td><a href="/readCandidateToUpdate?ehdokas_id=<%out.println(c.getId());%>">update</a></td>
 			<td><a href="/deletecandidate?ehdokas_id=<%out.println(c.getId());%>" onclick='return confirm(<%out.println('"'+Poistetaanko+'"');%>)'>delete</a></td>

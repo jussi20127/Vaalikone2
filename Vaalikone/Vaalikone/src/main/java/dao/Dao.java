@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import data.Party;
 import data.Question;
 import data.Subject;
 
@@ -174,4 +175,37 @@ public class Dao {
 			return null;
 		}
 	}
+	//-------------- PUOLUEET --------------------------------------------------------
+	
+		public ArrayList<Party> readAllParties() {
+			ArrayList<Party> list=new ArrayList<>();
+			try {
+				Statement stmt=conn.createStatement();
+				ResultSet RS=stmt.executeQuery("select * from parties");
+				while (RS.next()){
+					Party p=new Party();
+					p.setId(RS.getInt("id"));
+					p.setPuolue(RS.getString("puolue"));
+					list.add(p);
+				}
+				return list;
+			}
+			catch(SQLException e) {
+				return null;
+			}
+		}
+		public ArrayList<Party> addParty(String id, String puolue) {
+			try {
+				String sql="insert into parties values(?,?)";
+				PreparedStatement pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1,id);
+				pstmt.setString(2, puolue);
+				pstmt.executeUpdate();
+				return readAllParties();
+			}
+			catch(SQLException e) {
+				System.out.println("Ei onnistunut");
+				return null;
+			}
+		}
 }

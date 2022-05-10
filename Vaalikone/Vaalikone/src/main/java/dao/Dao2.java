@@ -50,7 +50,7 @@ public class Dao2 {
 				c.setSukunimi(RS.getString("sukunimi"));
 				c.setEtunimi(RS.getString("etunimi"));
 				c.setNumero(RS.getString("numero"));
-				//c.setParty(RS.getString("puolue"));
+				c.setPuolue(RS.getString("puolue"));
 				c.setKotipaikkakunta(RS.getString("kotipaikkakunta"));
 				c.setIka(RS.getString("ika"));
 				c.setAmmatti(RS.getString("ammatti"));
@@ -62,25 +62,27 @@ public class Dao2 {
 			return null;
 		}
 	}
-	public ArrayList<Candidate> updateCandidate(Candidate c) {
+	public ArrayList<Candidate> updateCandidate(Candidate c, String puolue_id) {
 		try {
 			//String sql="update candidates set id=? where id=?";
 			String sql1="update candidates set sukunimi=? where id=?";
 			String sql2="update candidates set etunimi=? where id=?";
 			String sql3="update candidates set numero=? where id=?";
-			//String sql4="update candidates set puolue=? where id=?";
+			String sql4="update candidates set puolue=? where id=?";
 			String sql5="update candidates set kotipaikkakunta=? where id=?";
 			String sql6="update candidates set ika=? where id=?";
 			String sql7="update candidates set ammatti=? where id=?";
+			String sql8="update candidates set Puolue_id=? where id=?";
 			
 			//PreparedStatement pstmt=conn.prepareStatement(sql);
 			PreparedStatement pstmt1=conn.prepareStatement(sql1);
 			PreparedStatement pstmt2=conn.prepareStatement(sql2);
 			PreparedStatement pstmt3=conn.prepareStatement(sql3);
-			//PreparedStatement pstmt4=conn.prepareStatement(sql4);
+			PreparedStatement pstmt4=conn.prepareStatement(sql4);
 			PreparedStatement pstmt5=conn.prepareStatement(sql5);
 			PreparedStatement pstmt6=conn.prepareStatement(sql6);
 			PreparedStatement pstmt7=conn.prepareStatement(sql7);
+			PreparedStatement pstmt8=conn.prepareStatement(sql8);
 			
 			//pstmt.setInt(1, c.getId());
 			//pstmt.setInt(2, c.getId());
@@ -94,8 +96,8 @@ public class Dao2 {
 			pstmt3.setInt(1, c.getNumero());
 			pstmt3.setInt(2, c.getId());
 			
-			//pstmt4.setInt(1, c.party_id());
-			//pstmt4.setInt(2, c.getId());
+			pstmt4.setString(1, c.getPuolue());
+			pstmt4.setInt(2, c.getId());
 			
 			pstmt5.setString(1, c.getKotipaikkakunta());
 			pstmt5.setInt(2, c.getId());
@@ -106,14 +108,18 @@ public class Dao2 {
 			pstmt7.setString(1, c.getAmmatti());
 			pstmt7.setInt(2, c.getId());
 			
+			pstmt8.setString(1, puolue_id);
+			pstmt8.setInt(2, c.getId());
+			
 			//pstmt.executeUpdate();
 			pstmt1.executeUpdate();
 			pstmt2.executeUpdate();
 			pstmt3.executeUpdate();
-			//pstmt4.executeUpdate();
+			pstmt4.executeUpdate();
 			pstmt5.executeUpdate();
 			pstmt6.executeUpdate();
 			pstmt7.executeUpdate();
+			pstmt8.executeUpdate();
 			return readAllCandidates();
 		}
 		catch(SQLException e) {
@@ -146,7 +152,7 @@ public class Dao2 {
 				c.setSukunimi(RS.getString("sukunimi"));
 				c.setEtunimi(RS.getString("etunimi"));
 				c.setNumero(RS.getInt("numero"));
-				//c.setPuolue(RS.getString("puolue"));
+				c.setPuolue(RS.getString("puolue"));
 				c.setKotipaikkakunta(RS.getString("kotipaikkakunta"));
 				c.setIka(RS.getInt("ika"));
 				c.setAmmatti(RS.getString("ammatti"));
@@ -158,18 +164,19 @@ public class Dao2 {
 			return null;
 		}
 	}
-	public ArrayList<Candidate> addCandidate(String sukunimi, String etunimi, String numero, String kotipaikkakunta, String ika, String ammatti) {
+	public ArrayList<Candidate> addCandidate(String sukunimi, String etunimi, String numero,String puolue, String kotipaikkakunta, String ika, String ammatti,String puolue_id) {
 		try {
-			String sql="insert into candidates (sukunimi,etunimi,numero,puolue_id,kotipaikkakunta,ika,ammatti) values(?,?,?,?,?,?,?)";
+			String sql="insert into candidates (sukunimi,etunimi,numero,puolue,kotipaikkakunta,ika,ammatti,puolue_id) values(?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			//pstmt.setString(1, id);
 			pstmt.setString(1, sukunimi);
 			pstmt.setString(2, etunimi);
 			pstmt.setString(3, numero);
-			pstmt.setString(4, "1"); // TÄMÄ VIELÄ KORJATTAVA!!!
+			pstmt.setString(4, puolue);
 			pstmt.setString(5, kotipaikkakunta);
 			pstmt.setString(6, ika);
 			pstmt.setString(7, ammatti);
+			pstmt.setString(8, puolue_id);
 			pstmt.executeUpdate();
 			return readAllCandidates();
 		}
