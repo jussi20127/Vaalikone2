@@ -30,6 +30,8 @@ public class Candidate implements Serializable {
 	private int numero;
 
 	private String sukunimi;
+	
+	private String puolue;
 
 	//bi-directional many-to-one association to Answer
 	@OneToMany(mappedBy="candidate")
@@ -40,13 +42,13 @@ public class Candidate implements Serializable {
 	@JoinColumn(name="PUOLUE_ID")
 	private Party party;
 	
-	public Candidate(String id, String sukunimi, String etunimi, String numero, String kotipaikkakunta, String ika, String ammatti) {
+	public Candidate(String id, String sukunimi, String etunimi,String puolue, String numero, String kotipaikkakunta, String ika, String ammatti) {
 		// Puolue-luokan rakentaja
 		setId(id);
 		this.sukunimi=sukunimi;
 		this.etunimi=etunimi;
 		setNumero(numero);
-		//this.party=puolue;
+		this.setPuolue(puolue);
 		this.kotipaikkakunta=kotipaikkakunta;
 		setIka(ika);
 		this.ammatti=ammatti;
@@ -162,6 +164,14 @@ public class Candidate implements Serializable {
 
 	public void setParty(Party party) {
 		this.party = party;
+	}
+
+	public String getPuolue() {
+		return puolue;
+	}
+
+	public void setPuolue(String puolue) {
+		this.puolue = puolue;
 	}
 
 }

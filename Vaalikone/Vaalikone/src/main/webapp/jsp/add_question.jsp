@@ -20,28 +20,7 @@
 </head>
 <body>
 
-<%
-// Hakee viimeisen kysymyksen ID:n lisää 1 ja asettaa nextFree arvoksi, joka annetaan uudelle kysymykselle ID:ksi.
-ArrayList<Question> questionList=(ArrayList<Question>)request.getAttribute("questionlist");
-int last = 1;
-int nextNumber =1;
-int nextFree =0;
-if(questionList.size()>0 && questionList!=null){
-	last = questionList.size();	
-	Question q = questionList.get(last-1);
-	nextNumber = q.getId()+1;
 
-
-for (int i=0;questionList!=null && i<questionList.size();i++){
-	
-	q=questionList.get(i);
-	if(i+1 != q.getId()){
-		nextFree = i+1;
-	break;}
-	}
-}
-
-%>
 
 
 
@@ -50,11 +29,7 @@ for (int i=0;questionList!=null && i<questionList.size();i++){
 <div>
 <form action='addupdate' method='post' onsubmit="return confirm('Haluatko varmasti lisätä kysymyksen?')">
 	
-	<!--  <label for="kysymys_numero">Kysymysnumero:</label><br>
-	<%if (nextFree !=0){%>
-	<input type="radio" name="kysymys_numero" value="<%=nextFree %>" required><%=nextFree %> (välistä puuttuva numero)<br>
-	<%};%>
-	<input type="radio" name="kysymys_numero" value="<%=nextNumber %>" required><%=nextNumber %> (seuraava vapaa numero)<br>-->
+	
 	
 	<label for="aihe">Aihealue:</label><br>
 	<select name='aihe' required>
