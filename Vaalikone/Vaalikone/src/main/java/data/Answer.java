@@ -2,6 +2,7 @@ package data;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.persistence.JoinColumn;
 
 
 /**

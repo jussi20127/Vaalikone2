@@ -34,7 +34,7 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 		    <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/r8vaalikone" />
 		    <property name="javax.persistence.jdbc.user" value="jussi" />
 		    <property name="javax.persistence.jdbc.password" value="ananas100" />
-		    <property name="eclipselink.ddl-generation" value="create-tables" />
+		   <!-- <property name="eclipselink.ddl-generation" value="create-tables" /> -->
 		</properties>
 	
 	</persistence-unit>
