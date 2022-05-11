@@ -78,6 +78,15 @@ public class JpaDao {
 			return new Candidate();
 		}
 		
+		public ArrayList<Candidate> readCandidate(int id) {
+			em.getTransaction().begin();
+			Candidate c=em.find(Candidate.class, id);
+			ArrayList<Candidate> list = new ArrayList<>();
+			list.add(c);
+			em.getTransaction().commit();
+			return list;
+		}	
+		
 		public ArrayList<Candidate> deleteCandidate(Candidate candidate) {
 			em.getTransaction().begin();
 			Candidate c=em.find(Candidate.class, candidate.getId());
@@ -120,6 +129,8 @@ public class JpaDao {
 		public Question getQuestion(int id) {
 			return new Question();
 		}
+		
+		
 		
 		public List<Question> deleteQuestion(Question question) {
 			em.getTransaction().begin();
