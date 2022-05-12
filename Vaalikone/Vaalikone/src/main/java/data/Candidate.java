@@ -148,7 +148,8 @@ public class Candidate implements Serializable {
 		}
 	}
 	public String getSukunimi() {
-		return this.sukunimi;
+		return sukunimi;
+		
 	}
 
 	public void setSukunimi(String sukunimi) {
