@@ -25,13 +25,11 @@ public class CandidateInfoService {
 		@POST
 		@Path("/getcandidateinfo")
 		@Produces(MediaType.APPLICATION_JSON)
-		public List<Candidate> getOneCandidate(@FormParam("id") int id) {
-			 EntityManager em=emf.createEntityManager();
-			 JpaDao jpadao = new JpaDao(em);
-			
-			 List<Candidate> list =  jpadao.readCandidate(id);
-			
-			 return list;	 
-		}
+		public Candidate getOneCandidate(@FormParam("id") int id) {
+			EntityManager em=emf.createEntityManager();
+			em.getTransaction().begin();
+			Candidate candidate=em.find(Candidate.class, id);
+			em.getTransaction().commit();
+			return candidate;
 	}
-
+}

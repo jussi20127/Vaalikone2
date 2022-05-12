@@ -25,22 +25,17 @@ public class ReadOneCandidateInfo extends HttpServlet {
       throws IOException, ServletException {
 	
 		//Tähän restful servicen osoite ja mitä metodia sieltä haetaan
-				String uri = "http://127.0.0.1:8080/rest/candidateinfoservice/getcandidateinfo";	 
+				String uri = "http://127.0.0.1:8080/rest/candidateinfoservice/getcandidateinfo/";	 
 				
 				//Client builder
 				Client asiakas=ClientBuilder.newClient();
 				WebTarget wt=asiakas.target(uri);
 				Builder b=wt.request();
 				
-				//Create a GenericType to be able to get List of objects
-				//This will be the second parameter of post method
-				GenericType<List<Candidate>> genericList = new GenericType<List<Candidate>>() {};
-				
-				//candidateInfoservice.javasta vastaanotettu lista tallennetaan returnedList-muuttujaan
-				List<Candidate> returnedList=b.get(genericList);
+				Candidate candidate = b.get(Candidate.class);
 				
 				//returnedList saa nimen "candidatelist"
-			    request.setAttribute("candidatelist", returnedList);
+			    request.setAttribute("candidate", candidate);
 				
 				 RequestDispatcher rd=request.getRequestDispatcher("./jsp/read_one_candidate.jsp");
 				  rd.forward(request, response);
