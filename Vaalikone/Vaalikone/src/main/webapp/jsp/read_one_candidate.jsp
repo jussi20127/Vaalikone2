@@ -14,7 +14,7 @@
 	</div>
 	<table>
 	
-	<c:forEach var="kysymys" items="${requestScope.candidatelist}">
+	<c:forEach var="kysymys" items="${requestScope.candidateinfo}">
 	<tr>
 	<td>${ehdokas.etunimi}</td>
 	</c:forEach>
