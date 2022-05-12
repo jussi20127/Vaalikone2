@@ -12,10 +12,14 @@
 <div class="header">
 	<h1>Vaalikone</h1>
 	</div>
-		<c:forEach var="candidate" items="${requestScope.candidatelist}">
-	<li>${candidate.sukunimi}<br>
-	</li>
+	<table>
+	
+	<c:forEach var="kysymys" items="${requestScope.candidatelist}">
+	<tr>
+	<td>${ehdokas.etunimi}</td>
 	</c:forEach>
+	
+	</table>
 	<br>
     <a href="/">Palaa etusivulle</a>
   

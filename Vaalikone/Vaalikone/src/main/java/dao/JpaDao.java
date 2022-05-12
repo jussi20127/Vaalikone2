@@ -78,11 +78,17 @@ public class JpaDao {
 			return new Candidate();
 		}
 		
-		public ArrayList<Candidate> readCandidate(int id) {
+		public List<String> readCandidate(int id) {
 			em.getTransaction().begin();
 			Candidate c=em.find(Candidate.class, id);
-			ArrayList<Candidate> list = new ArrayList<>();
-			list.add(c);
+			ArrayList<String> list = new ArrayList<>();
+			list.add(c.getEtunimi());
+			list.add(c.getSukunimi());
+			list.add(c.numero());
+			list.add(c.getPuolue());
+			list.add(c.ika());
+			list.add(c.getKotipaikkakunta());
+			list.add(c.getAmmatti());
 			em.getTransaction().commit();
 			return list;
 		}	

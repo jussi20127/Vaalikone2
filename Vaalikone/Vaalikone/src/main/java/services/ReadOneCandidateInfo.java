@@ -1,6 +1,6 @@
 package services;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -17,25 +17,26 @@ import javax.ws.rs.core.GenericType;
 
 import data.Candidate;
 
+
 @WebServlet("/ReadOneCandidateInfo")
 public class ReadOneCandidateInfo extends HttpServlet {
 
 	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
 	
 		//Tähän restful servicen osoite ja mitä metodia sieltä haetaan
-				String uri = "http://127.0.0.1:8080/rest/candidateinfoservice/getcandidateinfo/";	 
+				String uri = "http://127.0.0.1:8080/rest/candidateinfoservice/getcandidateinfo";	 
 				
 				//Client builder
 				Client asiakas=ClientBuilder.newClient();
 				WebTarget wt=asiakas.target(uri);
 				Builder b=wt.request();
 				
-				Candidate candidate = b.get(Candidate.class);
-				
+				GenericType<List<Candidate>> genericList = new GenericType<List<Candidate>>() {};
+				List<Candidate> returnedList=b.get(genericList);
 				//returnedList saa nimen "candidatelist"
-			    request.setAttribute("candidate", candidate);
+			    request.setAttribute("candidatelist", returnedList);
 				
 				 RequestDispatcher rd=request.getRequestDispatcher("./jsp/read_one_candidate.jsp");
 				  rd.forward(request, response);
