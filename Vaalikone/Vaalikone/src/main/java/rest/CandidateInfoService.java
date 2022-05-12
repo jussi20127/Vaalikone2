@@ -1,5 +1,6 @@
 package rest;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 
 import dao.JpaDao;
 import data.Candidate;
+import data.Question;
 
 @Path("/candidateinfoservice") 
 public class CandidateInfoService {
@@ -25,11 +27,11 @@ public class CandidateInfoService {
 		@POST
 		@Path("/getcandidateinfo")
 		@Produces(MediaType.APPLICATION_JSON)
-		public Candidate getOneCandidate(@FormParam("id") int id) {
-			EntityManager em=emf.createEntityManager();
-			em.getTransaction().begin();
-			Candidate candidate=em.find(Candidate.class, id);
-			em.getTransaction().commit();
-			return candidate;
+		public List<String> getOneCandidate(@FormParam("id") int id)
+		{
+			 EntityManager em=emf.createEntityManager();
+			JpaDao jpadao = new JpaDao(em);
+			List<String> list = jpadao.readCandidate(id);
+			return list;
 	}
 }

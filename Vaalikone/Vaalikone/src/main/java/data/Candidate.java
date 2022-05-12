@@ -53,6 +53,16 @@ public class Candidate implements Serializable {
 		setIka(ika);
 		this.ammatti=ammatti;
 	}
+	public Candidate(String sukunimi, String etunimi, String puolue, int numero, String kotipaikkakunta, int ika, String ammatti) {
+		setId(id);
+		this.sukunimi=sukunimi;
+		this.etunimi=etunimi;
+		this.puolue=puolue;
+		this.numero=numero;
+		this.kotipaikkakunta=kotipaikkakunta;
+		this.ika=ika;
+		this.ammatti=ammatti;
+	}
 
 	public Candidate() {
 	}
@@ -92,6 +102,10 @@ public class Candidate implements Serializable {
 	public int getIka() {
 		return this.ika;
 	}
+	public String ika() {
+		String age = String.valueOf(ika);
+		return age;
+	}
 
 	public void setIka(int ika) {
 		this.ika = ika;
@@ -117,6 +131,11 @@ public class Candidate implements Serializable {
 		return this.numero;
 	}
 
+	public String numero() {
+		String number = String.valueOf(numero);
+		return number;
+	}
+	
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
