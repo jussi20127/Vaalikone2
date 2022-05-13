@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style type="text/css">
+.header3 {
+
+	border-radius: 5px;
+	padding: 20px;
+	 background-color: white;
+
+}
+
+</style>
 <title>Ehdokastunnus</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../css/indexstyle.css">
+    <link rel="stylesheet" type="text/css" href="../css/showcanidatetoedit.css">
 </head>
 <body>
 <div class="header">
 	<h1>Vaalikone</h1>
 	  </div>
+	  <div class="header3">
 	<h3>Syötä tiedot:</h3>
+	</div>
+	<div>
 	<form action='./rest/candidateinfoservice/getcandidateinfo/' method='post'>
 	
 	<label for="id">Ehdokastunnus:</label><br>
@@ -18,6 +31,7 @@
 	<input type="submit" name="sendButton" value="Ok"><br>
 	
 </form>
+</div>
 <br>
 	<div id="buttons">
     <a href="/">Palaa etusivulle</a>
