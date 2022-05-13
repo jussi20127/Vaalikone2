@@ -39,7 +39,7 @@ public class CandidateInfoService {
 		{
 			 EntityManager em=emf.createEntityManager();
 			JpaDao jpadao = new JpaDao(em);
-			List<String> list = jpadao.readCandidate(id);
+			List<Candidate> list = jpadao.readOneCandidate(id);
 			RequestDispatcher rd=request.getRequestDispatcher("/jsp/read_one_candidate.jsp");
 			request.setAttribute("candidateinfo", list);
 			try {

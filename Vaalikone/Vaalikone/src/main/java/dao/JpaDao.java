@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.PathParam;
 
 import data.Answer;
 import data.Candidate;
@@ -77,6 +78,15 @@ public class JpaDao {
 		public Candidate getCandidate(int id) {
 			return new Candidate();
 		}
+		
+		public List<Candidate> readOneCandidate(int id) {
+			em.getTransaction().begin();
+			Candidate c=em.find(Candidate.class, id);
+			ArrayList<Candidate> list = new ArrayList<>();
+			list.add(c);
+			em.getTransaction().commit();
+			return list;
+		}	
 		
 		public List<String> readCandidate(int id) {
 			em.getTransaction().begin();
