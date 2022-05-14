@@ -36,6 +36,11 @@ public class Answer implements Serializable {
 	public Answer() {
 	}
 
+	public Answer(int vastaus) {
+		// TODO Auto-generated constructor stub
+		this.vastaus=vastaus;
+	}
+
 	public int getId() {
 		return this.id;
 	}
