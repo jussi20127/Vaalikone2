@@ -2,7 +2,6 @@ package data;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.persistence.JoinColumn;
 
 
 /**
@@ -22,7 +21,8 @@ public class Answer implements Serializable {
 	private int vastaus;
 
 	//bi-directional many-to-one association to Candidate
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name="candidate_id")
 	private Candidate candidate;
 
 	//bi-directional many-to-one association to Subject
