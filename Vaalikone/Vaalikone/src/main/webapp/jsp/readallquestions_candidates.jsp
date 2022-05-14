@@ -19,14 +19,17 @@
 	</div>
 	<div class="questionTable">
 	<div class="wrapper">
-	<form><ol>
+	<form method="post" action="Save_Answers"><ol>
+	<h3>Ehdokasnumerosi:</h3>
+	<input type="field" name="ehdokas_id"/>
 	<c:forEach var="kysymys" items="${requestScope.questionlist}">
-	<h3><li>${kysymys.kysymys}</h3>
-	    <input type="checkbox" id="yksi" name="${vastaus}"  value="${yksi}"/>Täysin eri mieltä<br>
-	    <input type="checkbox" id="kaksi" name="${vastaus}" value="${kaksi}"/>Eri mieltä<br>
-	    <input type="checkbox" id="kolme" name="${vastaus}"  value="${kolme}"/>En osaa sanoa<br>
-	    <input type="checkbox" id="neljä" name="${vastaus}"  value="${neljä}"/>Samaa mieltä<br>
-	    <input type="checkbox" id="viisi" name="${vastaus}" value="${viisi}"/>Täysin samaa mieltä<br>
+	<h3>${kysymys.aihealue}</h3>
+	<h3><li>${kysymys.kysymys}: <input type='field' name='question_id' value='${requestScope.question.id}'></h3>
+	    <input type="checkbox" name="vastaus"  value="1"/>Täysin eri mieltä<br>
+	    <input type="checkbox" name="vastaus" value="2"/>Eri mieltä<br>
+	    <input type="checkbox" name="vastaus"  value="3"/>En osaa sanoa<br>
+	    <input type="checkbox" name="vastaus"  value="4"/>Samaa mieltä<br>
+	    <input type="checkbox" name="vastaus" value="5"/>Täysin samaa mieltä<br>
 	    </li>
 	    <br>
 	</c:forEach>
