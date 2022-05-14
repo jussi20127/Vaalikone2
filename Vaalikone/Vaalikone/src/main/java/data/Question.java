@@ -54,7 +54,7 @@ public class Question implements Serializable {
 	}
 
 	public String getAihealue() {
-		return this.aihealue;
+		return aihealue;
 	}
 
 	public void setAihealue(String aihealue) {
@@ -62,7 +62,7 @@ public class Question implements Serializable {
 	}
 
 	public String getKysymys() {
-		return this.kysymys;
+		return kysymys;
 	}
 
 	public void setKysymys(String kysymys) {
@@ -90,5 +90,7 @@ public class Question implements Serializable {
 
 		return answer;
 	}
-
+	public String toString() {
+		return this.aihealue+" "+this.kysymys;
+	}
 }
