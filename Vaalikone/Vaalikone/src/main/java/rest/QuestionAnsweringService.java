@@ -24,13 +24,13 @@ import javax.ws.rs.core.MediaType;
 import dao.JpaDao;
 import data.Question;
 
-@Path("/questionbysubject") 
-public class QuestionBySubject {
+@Path("/questionansweringservice") 
+public class QuestionAnsweringService {
 	
 	EntityManagerFactory emf=Persistence.createEntityManagerFactory("r8vaalikone");
 	
 	@GET
-	@Path("/getquestions")
+	@Path("/getquestionstoanswer")
 	@Produces(MediaType.APPLICATION_JSON)
 	public void getQuestions(@Context HttpServletRequest request, @Context HttpServletResponse response) {
 		 EntityManager em=emf.createEntityManager();
@@ -41,7 +41,8 @@ public class QuestionBySubject {
 				 ArrayList<String> newList = new ArrayList<>();
 				 newList.add(entry.getKey() + entry.getValue());
 			 }
-			RequestDispatcher rd=request.getRequestDispatcher("/jsp/questions_and_subjects.jsp");
+		
+			RequestDispatcher rd=request.getRequestDispatcher("/jsp/questions_answers.jsp");
 			request.setAttribute("questionslist", questionsBySubject);
 			try {
 				rd.forward(request, response);
@@ -49,9 +50,7 @@ public class QuestionBySubject {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}	
 	
 }
-
 

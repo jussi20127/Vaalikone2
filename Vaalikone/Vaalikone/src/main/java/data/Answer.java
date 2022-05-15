@@ -22,15 +22,15 @@ public class Answer implements Serializable {
 	private int vastaus;
 
 	//bi-directional many-to-one association to Candidate
-	@ManyToOne
+	@ManyToOne (cascade = CascadeType.PERSIST)
 	private Candidate candidate;
 
 	//bi-directional many-to-one association to Subject
-	@ManyToOne
+	@ManyToOne (cascade = CascadeType.PERSIST)
 	private Subject subject;
 
 	//bi-directional many-to-one association to Question
-	@ManyToOne
+	@ManyToOne (cascade = CascadeType.PERSIST)
 	private Question question;
 
 	public Answer() {
@@ -40,7 +40,7 @@ public class Answer implements Serializable {
 		// TODO Auto-generated constructor stub
 		this.vastaus=vastaus;
 	}
-
+	
 	public int getId() {
 		return this.id;
 	}

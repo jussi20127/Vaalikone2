@@ -34,7 +34,7 @@ public class Candidate implements Serializable {
 	private String puolue;
 
 	//bi-directional many-to-one association to Answer
-	@OneToMany(mappedBy="candidate")
+	@OneToMany(mappedBy="candidate", cascade = CascadeType.PERSIST)
 	private List<Answer> answers;
 
 	//bi-directional many-to-one association to Party
