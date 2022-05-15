@@ -24,7 +24,7 @@ public class Question implements Serializable {
 	private String kysymys;
 
 	//bi-directional many-to-one association to Answer
-	@OneToMany(mappedBy="question")
+	@OneToMany(mappedBy="question", cascade = CascadeType.PERSIST)
 	private List<Answer> answers;
 	
 	public Question(String id, String kysymys, String aihe) {
@@ -34,6 +34,12 @@ public class Question implements Serializable {
 		this.aihealue=aihe;
 	}
 
+	public Question(String id) {
+		// TODO Auto-generated constructor stub
+		setId(id);
+		
+	} 
+	
 	public Question() {
 	}
 
