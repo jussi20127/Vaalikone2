@@ -101,6 +101,8 @@ div {
 	</div>
 	<br>
     <a href="/">Palaa etusivulle</a>
-  
+    <c:forEach var="candidate" items="${requestScope.candidateinfo}">
+    <a href="/rest/questionansweringservice/checkmyanswers/${candidate.id}">Näytä vastaukseni</a>
+  	</c:forEach>
 </body>
 </html>

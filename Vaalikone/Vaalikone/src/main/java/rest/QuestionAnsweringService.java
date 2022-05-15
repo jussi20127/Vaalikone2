@@ -15,14 +15,18 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import dao.JpaDao;
 import data.Question;
+import data.Answer;
+import data.Candidate;
 
 @Path("/questionansweringservice") 
 public class QuestionAnsweringService {
@@ -50,7 +54,32 @@ public class QuestionAnsweringService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}	
+		}
 	
+	
+	@GET
+	@Path("/checkmyanswers/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.TEXT_PLAIN)
+	public void checkMyAnswers(@PathParam("id") int id,@Context HttpServletRequest request, @Context HttpServletResponse response) {
+		 EntityManager em=emf.createEntityManager();
+			JpaDao jpadao = new JpaDao(em);
+			Candidate candidate = jpadao.getCandidateByID(id);
+			List<Answer> list2 = candidate.getAnswers();
+			
+			RequestDispatcher rd=request.getRequestDispatcher("/jsp/questions_answers.jsp");
+			request.setAttribute("answerlist", list2);
+			try {
+				rd.forward(request, response);
+			} catch (ServletException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+	}
+		
+
 }
+	
+	
 
