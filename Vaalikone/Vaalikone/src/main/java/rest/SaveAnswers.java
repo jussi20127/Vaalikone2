@@ -1,5 +1,7 @@
 package rest;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -28,21 +30,44 @@ public class SaveAnswers {
 	@Path("/saveallanswers")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes("application/x-www-form-urlencoded")
-	public void saveAllAnswers(@FormParam ("id") int id, @FormParam ("question_id") int kysymys_id, @FormParam ("vastaus") int numero,
+	public void saveAllAnswers(@FormParam ("id") int id, @FormParam ("question_id") List<String> kysymys_id, @FormParam ("vastaus") List<String> vastaus,
 			@Context HttpServletRequest request, @Context HttpServletResponse response) {
 		
-		System.out.print("ehdokas"+id);
-		System.out.print("kysymys"+kysymys_id);
-		System.out.print("vastaus"+numero);
-		 EntityManager em=emf.createEntityManager();
+		EntityManager em=emf.createEntityManager();
+		
+		//Vastaus-listan koko
+		int size = vastaus.size();
+		for (int i=0; i<size; i++) {
+			JpaDao jpadao = new JpaDao(em);
+			String vastausString = vastaus.get(i);
+			int vastausInt = Integer.parseInt(vastausString);
+			 Answer answer = new Answer(vastausInt);
+			 
+			 //Otetaan kysymys_id-listasta indeksistä i String-muuttujaan arvo
+			 String kysymysString = kysymys_id.get(i);
+			 //Muutetaan kysymysString integeriksi
+			 int kysymysInt = Integer.parseInt(kysymysString);
+			 Question question = em.find(Question.class, kysymysInt);
+			 Candidate candidate = em.find(Candidate.class, id); 
+			 candidate.addAnswer(answer);
+			 answer.setQuestion(question);
+			 jpadao.addCandidate(candidate);
+			 System.out.print("Tallennettu vastaus on: " + vastausInt);
+			 System.out.print("Tallennettu kysymys_id on: " + kysymysInt);
+		}
+		
+		//edellinen koodinpätkä, jätetty varmuuden vuoksi
+		 /*EntityManager em=emf.createEntityManager();
 		 JpaDao jpadao = new JpaDao(em);
-		 Answer answer = new Answer(numero);
+		 Answer answer = new Answer(toinen2);
 		 Question question = em.find(Question.class, kysymys_id);
 		 Candidate candidate = em.find(Candidate.class, id); 
 		 candidate.addAnswer(answer);
 		 answer.setQuestion(question);
 		 jpadao.addCandidate(candidate);
-		 
+		 */
+		
+		System.out.print("Lista käyty läpi.");
 		 
 		 
 //		 Question question = jpadao.getQuestion(kysymys_id);
