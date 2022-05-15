@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.PathParam;
 
 import data.Answer;
@@ -75,8 +76,11 @@ public class JpaDao {
 		public Candidate getCandidate(Candidate candidate) {
 			return new Candidate();
 		}
-		public Candidate getCandidate(int id) {
-			return new Candidate();
+		public Candidate getCandidateByID(int id) {
+			em.getTransaction().begin();
+			Candidate c=em.find(Candidate.class, id);
+			em.getTransaction().commit();
+			return c;
 		}
 		
 		public List<Candidate> readOneCandidate(int id) {
@@ -86,7 +90,16 @@ public class JpaDao {
 			list.add(c);
 			em.getTransaction().commit();
 			return list;
-		}	
+		}
+		public List<Candidate> readOneCandidateByNumber(int nro) {
+			em.getTransaction().begin();
+			Query q=em.createQuery("select c from Candidate c where c.numero like :numero");
+			q.setParameter("numero", nro);
+			List<Candidate> list=q.getResultList();
+			em.getTransaction().commit();
+			em.close();
+			return list;
+		}
 		
 		public List<String> readCandidate(int id) {
 			em.getTransaction().begin();
