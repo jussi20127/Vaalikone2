@@ -177,6 +177,14 @@ public class JpaDao {
 			return list;
 		}
 		
+		//haetaan yksi kysmys
+		public Question readOneQuestion(int id) {
+			em.getTransaction().begin();
+			Question q=em.find(Question.class, id);
+			em.getTransaction().commit();
+			return q;
+		}	
+		
 		//subjects - en tiedä tarvitaanko, mutta varavuoksi
 		public void addSubject(Subject subject) {
 			em.getTransaction().begin();
