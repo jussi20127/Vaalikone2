@@ -32,10 +32,9 @@
 	    <br>
 	     
            </c:forEach> 
-            <input type="submit" value="Submit">
            <br>
             </c:forEach>
-          
+          <input type="submit" value="Submit">
        </ol></form>
 </body>
 </html>
