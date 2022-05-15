@@ -45,9 +45,6 @@ public class Answer implements Serializable {
 		return this.id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public int getVastaus() {
 		return this.vastaus;

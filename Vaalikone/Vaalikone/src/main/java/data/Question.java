@@ -27,6 +27,18 @@ public class Question implements Serializable {
 	@OneToMany(mappedBy="question", cascade = CascadeType.PERSIST)
 	private List<Answer> answers;
 	
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name="CANDIDATE_ID")
+	private Candidate candidate;
+	
+	public Candidate getCandidate() {
+		return candidate;
+	}
+
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
+	}
+
 	public Question(String id, String kysymys, String aihe) {
 		// TODO Auto-generated constructor stub
 		setId(id);
@@ -38,7 +50,10 @@ public class Question implements Serializable {
 		// TODO Auto-generated constructor stub
 		setId(id);
 		
-	} 
+	}
+	public Question(int id) {
+		setId(id);
+	}
 	
 	public Question() {
 	}

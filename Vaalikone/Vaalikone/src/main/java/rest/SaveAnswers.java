@@ -36,9 +36,11 @@ public class SaveAnswers {
 		System.out.print("vastaus"+numero);
 		 EntityManager em=emf.createEntityManager();
 		 JpaDao jpadao = new JpaDao(em);
-		 Answer answer = new Answer(numero);
-		 Candidate candidate = jpadao.getCandidate(id);
+		 Answer answer = new Answer(1);
+		 Question question = new Question(1);
+		 Candidate candidate = em.find(Candidate.class, 1); 
 		 candidate.addAnswer(answer);
+		 candidate.addQuestion(question);
 		 jpadao.addCandidate(candidate);
 		 
 		 
