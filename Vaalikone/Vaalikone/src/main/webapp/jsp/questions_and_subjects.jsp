@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>     
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+     
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,9 +106,9 @@ a:hover, a:active {
     <tr class="row">
       <td class="bold">${questionMap.key}</td>
       <td>
-        <!-- iterate over each item in the list of foods -->
-        <c:forEach var="kysymys" items="${questionMap.value}">         
-          ${kysymys.kysymys} <a href="/EditUpdate?kysymys_id=${kysymys.id}">update</a>
+        <!-- iterate over each item in the list of questions -->
+        <c:forEach var="kysymys" items="${questionMap.value}" varStatus="status">         
+          ${status.count}: ${kysymys.kysymys}  <a href="/EditUpdate?kysymys_id=${kysymys.id}">update</a>
       <a href="/deleteQuestion?kysymys_id=${kysymys.id}">delete</a><br><br> 
          </c:forEach> 
       </td> 
@@ -120,6 +122,7 @@ a:hover, a:active {
 
 	<div id="buttons">
     <a href="/">Palaa etusivulle</a>
+    <a href="/AddQuestion">Lisää Kysymys</a>
     </div>
   </div>
   </div>
