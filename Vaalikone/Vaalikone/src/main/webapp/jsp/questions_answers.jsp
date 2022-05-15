@@ -30,11 +30,12 @@
 	    <input type="checkbox" name="vastaus"  value="4"/>Samaa mieltä<br>
 	    <input type="checkbox" name="vastaus" value="5"/>Täysin samaa mieltä<br>
 	    <br>
-	     <input type="submit" value="Submit">
+	     
            </c:forEach> 
+            <input type="submit" value="Submit">
            <br>
             </c:forEach>
-           
+          
        </ol></form>
 </body>
 </html>
