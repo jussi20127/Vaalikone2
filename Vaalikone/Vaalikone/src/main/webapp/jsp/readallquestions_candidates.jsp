@@ -14,7 +14,7 @@
 	<h1>Vaalikone</h1>
 </div>
 	
-	<div class="header">
+	<div class="header3">
 		<h3>Vastaa alla oleviin väittämiin. Voit myös jättää kysymyksen vastaamatta, vastaamattomia kysymyksiä ei huomioida.</h3>
 	</div>
 	<div class="questionTable">

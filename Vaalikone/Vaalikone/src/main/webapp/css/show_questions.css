@@ -15,6 +15,13 @@ body {
 	border-bottom: 2px solid gray;
 }
 
+.header3 {
+	background-color: #C9E1B5;
+	padding: 20px;
+	text-align: center;
+	border-bottom: 2px solid gray;
+}
+
 #questionTable {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
