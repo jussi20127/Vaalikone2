@@ -36,10 +36,13 @@ public class Candidate implements Serializable {
 	//bi-directional many-to-one association to Answer
 	@OneToMany(mappedBy="candidate", cascade = CascadeType.PERSIST)
 	private List<Answer> answers;
+	
+	@OneToMany(mappedBy="candidate", cascade = CascadeType.PERSIST)
+	private List<Question> questions;
 
 	//bi-directional many-to-one association to Party
 	@ManyToOne
-	@JoinColumn(name="PUOLUE_ID")
+	@PrimaryKeyJoinColumn(name="PUOLUE_ID")
 	private Party party;
 	
 	public Candidate(String id, String sukunimi, String etunimi,String puolue, String numero, String kotipaikkakunta, String ika, String ammatti) {
@@ -176,6 +179,27 @@ public class Candidate implements Serializable {
 		answer.setCandidate(null);
 
 		return answer;
+	}
+	public List<Question> getQuestion() {
+		return this.questions;
+	}
+
+	public void setQuestion(List<Question> questions) {
+		this.questions = questions;
+	}
+
+	public Question addQuestion(Question question) {
+		getQuestion().add(question);
+		question.setCandidate(this);
+
+		return question;
+	}
+
+	public Question removeQuestion(Question question) {
+		getQuestion().remove(question);
+		question.setCandidate(null);
+
+		return question;
 	}
 
 	public Party getParty() {
