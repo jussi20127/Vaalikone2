@@ -101,13 +101,14 @@ div {
 	<th>  <br /> </th>
 	</tr>
 	
-	
-		 <tr>
+	 <tr>
 			<c:forEach var="answer" items="${candidate.answers}">
-		<th>${answer.id}: ${answer.vastaus}</th>
-		</tr>	
+			 <th>${answer.question.kysymys}: ${answer.vastaus}</th>
+			</c:forEach>
+			
+			
 		</c:forEach>
-	</c:forEach>
+	</tr>
 	</table>
 	</div>
 	
