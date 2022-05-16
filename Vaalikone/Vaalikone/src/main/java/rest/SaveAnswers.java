@@ -35,10 +35,20 @@ public class SaveAnswers {
 		
 		EntityManager em=emf.createEntityManager();
 		
-		//Vastaus-listan koko
+		
+		Candidate c = em.find(Candidate.class, id);
+		List<Answer> c1 = c.getAnswers();
+		if (c1.size() < 1) {
+		
+			
+			
+			//Vastaus-listan koko
 		int size = vastaus.size();
 		for (int i=0; i<size; i++) {
 			JpaDao jpadao = new JpaDao(em);
+			
+			
+			
 			String vastausString = vastaus.get(i);
 			int vastausInt = Integer.parseInt(vastausString);
 			 Answer answer = new Answer(vastausInt);
@@ -48,12 +58,16 @@ public class SaveAnswers {
 			 //Muutetaan kysymysString integeriksi
 			 int kysymysInt = Integer.parseInt(kysymysString);
 			 Question question = em.find(Question.class, kysymysInt);
-			 Candidate candidate = em.find(Candidate.class, id); 
+			 Candidate candidate = em.find(Candidate.class, id);
+			 
+			 
+			
 			 candidate.addAnswer(answer);
 			 answer.setQuestion(question);
 			 jpadao.addCandidate(candidate);
 			 System.out.print("Tallennettu vastaus on: " + vastausInt);
 			 System.out.print("Tallennettu kysymys_id on: " + kysymysInt);
+			 
 		}
 		
 		//edellinen koodinpätkä, jätetty varmuuden vuoksi
@@ -68,7 +82,9 @@ public class SaveAnswers {
 		 */
 		
 		System.out.print("Lista käyty läpi.");
-		 
+		}else {
+			System.out.println(c1+"täynnä");
+		}
 		 
 //		 Question question = jpadao.getQuestion(kysymys_id);
 //		
