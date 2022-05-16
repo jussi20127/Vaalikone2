@@ -37,17 +37,17 @@ public class JpaDao {
 			return new Answer();
 		}
 		
-		public ArrayList<Answer> deleteAnswer(Answer answer) {
+		public List<Answer> deleteAnswer(int id) {
 			em.getTransaction().begin();
-			Answer a=em.find(Answer.class, answer.getId());
+			Answer a=em.find(Answer.class, id);
 			if (a!=null) {
 				em.remove(a);//The actual insertion line
 			}
 			em.getTransaction().commit();
-			ArrayList<Answer> list=readAnswers();		
+			List<Answer> list=readAnswers();		
 			return list;
 		}
-		public ArrayList<Answer> updateAnswer(Answer answer) {
+		public List<Answer> updateAnswer(Answer answer) {
 			em.getTransaction().begin();
 			Answer a=em.find(Answer.class, answer.getId());
 			if (a!=null) {
@@ -55,13 +55,13 @@ public class JpaDao {
 			}
 			em.getTransaction().commit();
 			//Calling the method readFish() of this service
-			ArrayList<Answer> list=readAnswers();		
+			List<Answer> list=readAnswers();		
 			return list;
 			
 		}
-		public ArrayList<Answer> readAnswers() {
+		public List<Answer> readAnswers() {
 			em.getTransaction().begin();
-			ArrayList<Answer> list=(ArrayList<Answer>) em.createQuery("select a from Answers a").getResultList();
+			List<Answer> list=(List<Answer>) em.createQuery("select a from Answer a").getResultList();
 			em.getTransaction().commit();
 			return list;
 		}

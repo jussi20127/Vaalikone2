@@ -102,17 +102,17 @@ div {
 	</tr>
 	
 	 <tr>
-			<c:forEach var="answer" items="${candidate.answers}">
-			 <th>${answer.question.kysymys}: ${answer.vastaus}</th>
+	 				
+			<th><h2>Vastaukset vaalikoneen kysymyksiin</h2><c:forEach var="answer" items="${candidate.answers}">
+			 <ol><u><h3>${answer.question.kysymys}</h3></u></ol><ol>Vastaus: <p> ${answer.vastaus}</p><a href="http://localhost:8080/rest/deleteanswerservice/deleteAnswer/${answer.id}">Poista</a></ol>
 			</c:forEach>
-			
+			</th>
 			
 		</c:forEach>
 	</tr>
 	</table>
 	</div>
-	
-	<br>
+		<br>
 	<ol>
     <a href="/">Etusivu</a>
     <c:forEach var="candidate" items="${requestScope.candidateinfo}">
