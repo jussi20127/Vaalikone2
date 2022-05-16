@@ -8,6 +8,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+
+a:link, a:visited {
+  background-color: #C9E1B5;
+  color: black;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+a:hover, a:active {
+  background-color: #86bc5a;
+}
+
+</style>
 <meta charset="UTF-8">
 <title>Vaalikone</title>
 
@@ -51,8 +69,9 @@ Ammatti:<br> <input type='text' name='ammatti' value='${requestScope.candidateli
 </div>
 <br>
 
-<a href='index.html'>Takaisin etusivulle</a><br>
-<a href='ShowCandidates'>Takaisin ehdokkaiden selaukseen</a><br>
+<ol>
+<a href='ShowCandidates'>Takaisin</a><br><br>
+<a href='index.html'>Etusivu</a><br></ol>
 
 </body>
 </html>

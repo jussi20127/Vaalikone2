@@ -49,10 +49,12 @@ font-family:verdana;
 a:link, a:visited {
   background-color: #C9E1B5;
   color: black;
-  padding: 14px 20px;
+  padding: 12px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 a:hover, a:active {
@@ -72,6 +74,7 @@ div {
 <div class="header">
 	<h1>Vaalikone</h1>
 	</div>
+	
 <div class="header3">	
 	<h3>Ehdokas:</h3>
 	</div>
@@ -96,13 +99,15 @@ div {
 	</tr>
 	</c:forEach>
 	
-	
 	</table>
 	</div>
+	
 	<br>
-    <a href="/">Palaa etusivulle</a>
+	<ol>
+    <a href="/">Etusivu</a>
     <c:forEach var="candidate" items="${requestScope.candidateinfo}">
     <a href="/rest/questionansweringservice/checkmyanswers/${candidate.id}">Näytä vastaukseni</a>
   	</c:forEach>
+  	</ol>
 </body>
 </html>

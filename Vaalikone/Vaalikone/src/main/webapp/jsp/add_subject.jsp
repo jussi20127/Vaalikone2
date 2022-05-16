@@ -10,6 +10,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+
+a:link, a:visited {
+  background-color: #C9E1B5;
+  color: black;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+a:hover, a:active {
+  background-color: #86bc5a;
+}
+
+</style>
 <meta charset="UTF-8">
 <title>Vaalikone Lisää aihealue</title>
 
@@ -58,9 +76,9 @@ for (int i=0;subjectList!=null && i<subjectList.size();i++){
 </form>
 </div>
 <br>
+	<ol><a href='ShowQuestions'>Takaisin</a><br><br>
+	<a href='index.html'>Etusivu</a><br></ol>
 	
-	<a href='index.html'>Takaisin etusivulle</a><br>
-	<a href='ShowQuestions'>Takaisin kysymysten selaukseen</a><br>
 	
 
 

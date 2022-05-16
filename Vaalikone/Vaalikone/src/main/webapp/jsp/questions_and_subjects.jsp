@@ -77,6 +77,7 @@ a:link, a:visited {
   text-align: center;
   text-decoration: none;
   display: inline-block;
+ 
 }
 
 a:hover, a:active {
@@ -108,10 +109,11 @@ a:hover, a:active {
       <td>
         <!-- iterate over each item in the list of questions -->
         <c:forEach var="kysymys" items="${questionMap.value}" varStatus="status">         
-          ${status.count}: ${kysymys.kysymys}  <a href="/EditUpdate?kysymys_id=${kysymys.id}">update</a>
-      <a href="/deleteQuestion?kysymys_id=${kysymys.id}">delete</a><br><br> 
+          ${status.count}: ${kysymys.kysymys}    
+          <a href="/EditUpdate?kysymys_id=${kysymys.id}">update</a>
+      		<a href="/deleteQuestion?kysymys_id=${kysymys.id}">delete</a><br><br>
          </c:forEach> 
-      </td> 
+     </td>
      
       
     </tr> 
