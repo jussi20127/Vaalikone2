@@ -37,7 +37,7 @@ public class CandidateInfoService {
 		@Consumes("application/x-www-form-urlencoded")
 		public void getOneCandidate(@FormParam("nro") int nro, @Context HttpServletRequest request, @Context HttpServletResponse response)
 		{
-			 EntityManager em=emf.createEntityManager();
+			EntityManager em=emf.createEntityManager();
 			JpaDao jpadao = new JpaDao(em);
 			List<Candidate> list = jpadao.readOneCandidateByNumber(nro);
 			RequestDispatcher rd=request.getRequestDispatcher("/jsp/read_one_candidate.jsp");
