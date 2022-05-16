@@ -97,11 +97,15 @@ div {
 	 <tr>
 	<th>${candidate.ammatti}</th>
 	</tr>
-		
+	<tr>
+	<th>  <br /> </th>
+	</tr>
+	
+	
+		 <tr>
 			<c:forEach var="answer" items="${candidate.answers}">
-			${answer.questions.kysymys}
-			<li>${answer.id}: ${answer.vastaus}
-			
+		<th>${answer.id}: ${answer.vastaus}</th>
+		</tr>	
 		</c:forEach>
 	</c:forEach>
 	</table>
