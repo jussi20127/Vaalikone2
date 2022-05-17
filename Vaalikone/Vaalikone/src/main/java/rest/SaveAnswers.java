@@ -1,10 +1,13 @@
 package rest;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -84,6 +87,18 @@ public class SaveAnswers {
 		System.out.print("Lista käyty läpi.");
 		}else {
 			System.out.println(c1+"täynnä");
+		}
+		
+		EntityManager em2=emf.createEntityManager();
+		JpaDao jpadao = new JpaDao(em2);
+		List<Candidate> list = jpadao.readOneCandidate(id);
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/read_one_candidate.jsp");
+		request.setAttribute("candidateinfo", list);
+		try {
+			rd.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		 
 //		 Question question = jpadao.getQuestion(kysymys_id);
