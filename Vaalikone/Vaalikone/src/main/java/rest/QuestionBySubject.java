@@ -34,6 +34,7 @@ public class QuestionBySubject {
 	@Produces(MediaType.APPLICATION_JSON)
 	public void getQuestions(@Context HttpServletRequest request, @Context HttpServletResponse response) {
 		 EntityManager em=emf.createEntityManager();
+		 em.getEntityManagerFactory().getCache().evictAll();
 			JpaDao jpadao = new JpaDao(em);
 			List<Question> list = jpadao.readQuestions();
 			Map<String, List<Question>> questionsBySubject = list.stream().collect(Collectors.groupingBy(Question::getAihealue));

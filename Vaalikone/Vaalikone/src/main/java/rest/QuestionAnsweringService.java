@@ -38,6 +38,7 @@ public class QuestionAnsweringService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public void getQuestions(@Context HttpServletRequest request, @Context HttpServletResponse response) {
 		 EntityManager em=emf.createEntityManager();
+		 em.getEntityManagerFactory().getCache().evictAll();
 			JpaDao jpadao = new JpaDao(em);
 			List<Question> list = jpadao.readQuestions();
 			Map<String, List<Question>> questionsBySubject = list.stream().collect(Collectors.groupingBy(Question::getAihealue));
@@ -63,6 +64,7 @@ public class QuestionAnsweringService {
 	@Consumes(MediaType.TEXT_PLAIN)
 	public void checkMyAnswers(@PathParam("id") int id,@Context HttpServletRequest request, @Context HttpServletResponse response) {
 		 EntityManager em=emf.createEntityManager();
+		 em.getEntityManagerFactory().getCache().evictAll();
 			JpaDao jpadao = new JpaDao(em);
 			Candidate candidate = jpadao.getCandidateByID(id);
 			List<Answer> list2 = candidate.getAnswers();

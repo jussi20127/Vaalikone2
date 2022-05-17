@@ -30,6 +30,7 @@ public class QuestionServiceForCandidate {
 	public List<Question> getQuestions(){
 		//Luodaan uusi EntityManager em
 	    EntityManager em=emf.createEntityManager();
+	    em.getEntityManagerFactory().getCache().evictAll();
 	    //Luodaan uusi JpaDao-luokan olio, konstruktorille luotu EntityManager em
 	    JpaDao jpadao = new JpaDao(em);
 	    //Uusi List-tyyppinen muuttuja list, joka vastaanottaa Question-olioita

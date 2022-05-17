@@ -40,6 +40,7 @@ public class DeleteService {
 	public void deleteAnswer(@PathParam("id") int id, @Context HttpServletRequest request, @Context HttpServletResponse response) {
 		System.out.println("Vastauksen id on :" + id);
 		EntityManager em=emf.createEntityManager();
+		em.getEntityManagerFactory().getCache().evictAll();
 		JpaDao jpadao = new JpaDao(em);
 		jpadao.deleteAnswer(id);
 		

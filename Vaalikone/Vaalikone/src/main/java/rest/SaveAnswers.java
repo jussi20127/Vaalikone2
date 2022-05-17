@@ -37,6 +37,7 @@ public class SaveAnswers {
 			@Context HttpServletRequest request, @Context HttpServletResponse response) {
 		
 		EntityManager em=emf.createEntityManager();
+		em.getEntityManagerFactory().getCache().evictAll();
 		
 		
 		Candidate c = em.find(Candidate.class, id);
