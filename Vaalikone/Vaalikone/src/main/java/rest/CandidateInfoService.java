@@ -35,12 +35,12 @@ public class CandidateInfoService {
 		@Path("/getcandidateinfo")
 		@Produces(MediaType.APPLICATION_JSON)
 		@Consumes("application/x-www-form-urlencoded")
-		public void getOneCandidate(@FormParam("nro") int nro, @Context HttpServletRequest request, @Context HttpServletResponse response)
+		public void getOneCandidate(@FormParam("nro") int id, @Context HttpServletRequest request, @Context HttpServletResponse response)
 		{
 			EntityManager em=emf.createEntityManager();
 			em.getEntityManagerFactory().getCache().evictAll(); 
 			JpaDao jpadao = new JpaDao(em);
-			List<Candidate> list = jpadao.readOneCandidateByNumber(nro);
+			List<Candidate> list = jpadao.readOneCandidate(id);
 			RequestDispatcher rd=request.getRequestDispatcher("/jsp/read_one_candidate.jsp");
 			request.setAttribute("candidateinfo", list);
 			try {
