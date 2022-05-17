@@ -37,7 +37,16 @@ public class JpaDao {
 			return new Answer();
 		}
 		
-		public List<Answer> deleteAnswer(int id) {
+		public void deleteAnswer(int id) {
+			em.getTransaction().begin();
+			Answer a=em.find(Answer.class, id);
+			if (a!=null) {
+				em.remove(a);//The actual insertion line
+			}
+			em.getTransaction().commit();
+		}
+		
+		public List<Answer> deleteAnswer2(int id) {
 			em.getTransaction().begin();
 			Answer a=em.find(Answer.class, id);
 			if (a!=null) {
