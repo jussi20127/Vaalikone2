@@ -103,8 +103,18 @@ div {
 	
 	 <tr>
 	 				
-			<th><h2>Vastaukset vaalikoneen kysymyksiin</h2><c:forEach var="answer" items="${candidate.answers}">
-			 <ol><u><h3>${answer.question.kysymys}</h3></u></ol><ol>Vastaus: <p> ${answer.vastaus}</p><a href="http://localhost:8080/rest/deleteanswerservice/deleteAnswer/${answer.id}">Poista</a></ol>
+			<th><h2>Vastaukset vaalikoneen kysymyksiin:</h2><c:forEach var="answer" items="${candidate.answers}">
+			
+			 <ol><h3><i>K: ${answer.question.kysymys}</i></h3></ol><ol><p>V:  ${answer.vastaus}</p>
+			 <a href="http://localhost:8080/rest/deleteanswerservice/deleteAnswer/${answer.id}">Poista</a>
+			 
+			<form action='http://localhost:8080/rest/updateanswerservice/updateoneanswer/' method='post'>
+			<input type="hidden" required name="id" value="${answer.id}" >
+			<input type="text" required name="uusivastaus" value="" ><br>
+			<input type="submit" name="sendButton" value="Päivitä"><br>
+			</form>
+			
+			 </ol>
 			</c:forEach>
 			</th>
 			
