@@ -66,6 +66,31 @@ div {
   padding: 20px;
 }
 
+input[type=text], select {
+  width: max-content;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: max-content;
+  background-color: #C9E1B5;
+  color:black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #86bc5a;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>Ehdokastiedot</title>
@@ -107,7 +132,9 @@ div {
 			
 			 <ol><h3><i>K: ${answer.question.kysymys}</i></h3></ol><ol><p>V:  ${answer.vastaus}</p>
 			 <a href="http://localhost:8080/rest/deleteanswerservice/deleteAnswer/${answer.id}">Poista</a>
-			 
+			 <br>
+			 <br>
+			 Uusi vastaus:
 			<form action='http://localhost:8080/rest/updateanswerservice/updateoneanswer/' method='post'>
 			<input type="hidden" required name="id" value="${answer.id}" >
 			<input type="text" required name="uusivastaus" value="" ><br>
@@ -125,9 +152,6 @@ div {
 		<br>
 	<ol>
     <a href="/">Etusivu</a>
-    <c:forEach var="candidate" items="${requestScope.candidateinfo}">
-    <a href="/rest/questionansweringservice/checkmyanswers/${candidate.id}">Näytä vastaukseni</a>
-  	</c:forEach>
   	</ol>
 </body>
 </html>
